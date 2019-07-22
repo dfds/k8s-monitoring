@@ -1,6 +1,6 @@
 ingress:
   enabled: true
-  path: /capability-vwxyz
+  path: /$NAMESPACE
   hosts:
   - grafana.hellman.oxygen.dfds.cloud
   annotations:
@@ -9,7 +9,7 @@ ingress:
 grafana.ini:
   server:
     domain: grafana.hellman.oxygen.dfds.cloud
-    root_url: "https://%(domain)s/capability-vwxyz"
+    root_url: $ROOT_URL
     # serve_from_sub_path: true
 
 rbac:
@@ -29,7 +29,7 @@ plugins:
 notifiers:
   notifiers.yaml:
     notifiers:
-      - name: notification-channel-1
+      - name: slack-channel-1
         type: slack
         uid: notifier1
         org_id: 1
@@ -40,7 +40,7 @@ notifiers:
         # See  section for settings supporter for each
         # alert notification type.
         settings:
-          recipient: "#hellman-alerting"
+          recipient: "#$SLACK_CHANNEL"
           uploadImage: true
-          url: https://hooks.slack.com/services/XXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ
+          url: $SLACK_URL
           username: alertbot
