@@ -95,3 +95,33 @@ Create a file and edit the following parameters
 # Install Grafana
 helm --namespace $NAMESPACE install stable/grafana --name grafana -f values.yaml
 ```
+
+### Using Grafana (rephrase)
+
+#### Generate dashboard configmaps
+
+1. Save the dashboard JSON from Grafana using the "Share dashboard" function. Click the "Export" tab and tick "Export for sharing externally" on
+2. Use the configmap template, replacing "DASHBOARD_JSON" with the contents for the exported JSON (the contents need to be indented 4 spaces to fit the yaml structure)
+3. Apply the generated configmap using `kubectl`
+
+PowerShell:
+
+```powershell
+# Define dashboard name - must be lowercase alphanum
+$DASHBOARD_NAME = 'grafana-dashboard-resourceusage'
+
+# Generate configmap, indenting JSON 4 spaces
+(Get-Content .\grafana-dashboard-template-cm.yaml) -replace "DASHBOARD_NAME",$DASHBOARD_NAME | Out-File .\$($DASHBOARD_NAME)-cm.yaml
+'    ' + (Get-Content .\$($DASHBOARD_NAME).json -Raw) -replace "`n","`n    " | Out-File .\$($DASHBOARD_NAME)-cm.yaml -Append
+```
+
+Bash:
+
+```bash
+# Define dashboard name - must be lowercase alphanum
+DASHBOARD_NAME=grafana-dashboard-resourceusage
+
+# Generate configmap, indenting JSON 4 spaces
+cat grafana-dashboard-template-cm.yaml | sed "s/DASHBOARD_NAME/${DASHBOARD_NAME}/g" > ./${DASHBOARD_NAME}-cm.yaml
+cat ${DASHBOARD_NAME}.json | sed "s/^/    /g" >> ./${DASHBOARD_NAME}-cm.yaml
+```
