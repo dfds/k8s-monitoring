@@ -2,14 +2,14 @@
 
 ## To do
 
-- Description on how to export dashboards, and import as configmaps
-- How to enable scraping of capability apps metrics
-- Review sample dashboards
-- Update deployment script to use token replacement
-- Make PowerShell deployment script
-- Revise /README.md
-- Revise /grafana/README.md
-- Create "How to get Slack Webhook URL" guide
+- [x] Description on how to export dashboards, and import as configmaps
+- [ ] How to enable scraping of capability apps metrics
+- [ ] Review sample dashboards
+- [ ] Update deployment script to use token replacement
+- [ ] Make PowerShell deployment script
+- [ ] Revise /README.md
+- [ ] Revise /grafana/README.md
+- [ ] Create "How to get Slack Webhook URL" guide
 
 ## Introduction
 
