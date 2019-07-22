@@ -112,8 +112,8 @@ PowerShell:
 $DASHBOARD_NAME = 'grafana-dashboard-resourceusage'
 
 # Generate configmap, indenting JSON 4 spaces
-(Get-Content .\grafana\template-dashboard-cm.yaml) -replace "DASHBOARD_NAME",$DASHBOARD_NAME | Out-File .\grafana\$($DASHBOARD_NAME)-cm.yaml
-'    ' + (Get-Content .\grafana\$($DASHBOARD_NAME).json -Raw) -replace "`n","`n    " | Out-File .\grafana\$($DASHBOARD_NAME)-cm.yaml -Append
+(Get-Content .\grafana\template-dashboard-cm.yaml) -replace "DASHBOARD_NAME",$DASHBOARD_NAME | Out-File .\grafana\configmaps\$($DASHBOARD_NAME)-cm.yaml
+'    ' + (Get-Content .\grafana\configmaps\$($DASHBOARD_NAME).json -Raw) -replace "`n","`n    " | Out-File .\grafana\configmaps\$($DASHBOARD_NAME)-cm.yaml -Append
 ```
 
 Bash:
@@ -123,6 +123,6 @@ Bash:
 DASHBOARD_NAME=grafana-dashboard-resourceusage
 
 # Generate configmap, indenting JSON 4 spaces
-cat ./grafana/template-dashboard-cm.yaml | sed "s/DASHBOARD_NAME/${DASHBOARD_NAME}/g" > ./grafana/${DASHBOARD_NAME}-cm.yaml
-cat ./grafana/${DASHBOARD_NAME}.json | sed "s/^/    /g" >> ./grafana/${DASHBOARD_NAME}-cm.yaml
+cat ./grafana/template-dashboard-cm.yaml | sed "s/DASHBOARD_NAME/${DASHBOARD_NAME}/g" > ./grafana/configmaps/${DASHBOARD_NAME}.yaml
+cat ./grafana/configmaps/${DASHBOARD_NAME}.json | sed "s/^/    /g" >> ./grafana/configmaps/${DASHBOARD_NAME}.yaml
 ```
