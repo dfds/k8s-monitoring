@@ -9,6 +9,7 @@
 - Make PowerShell deployment script
 - Revise /README.md
 - Revise /grafana/README.md
+- Create "How to get Slack Webhook URL" guide
 
 ## Introduction
 
