@@ -448,7 +448,7 @@ data:
             "options": [],
             "query": "label_values(kube_pod_info{cluster=\"$cluster\"}, namespace)",
             "refresh": 2,
-            "regex": "",
+            "regex": "($NAMESPACE_REGEX),
             "skipUrlSync": false,
             "sort": 1,
             "tagValuesQuery": "",
