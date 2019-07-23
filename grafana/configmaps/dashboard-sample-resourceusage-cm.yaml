@@ -7,7 +7,16 @@ metadata:
 data:
   dashboard.json: |-
     {
-      "__inputs": [],
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "__requires": [
         {
           "type": "grafana",
@@ -40,7 +49,7 @@ data:
             "type": "dashboard"
           },
           {
-            "datasource": "$datasource",
+            "datasource": "${DS_PROMETHEUS}",
             "enable": true,
             "expr": "time() == BOOL timestamp(rate(kube_pod_container_status_restarts_total{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}[2m]) > 0)",
             "hide": false,
@@ -54,7 +63,7 @@ data:
       "gnetId": null,
       "graphTooltip": 0,
       "id": null,
-      "iteration": 1563885419879,
+      "iteration": 1563889199658,
       "links": [],
       "panels": [
         {
@@ -408,26 +417,9 @@ data:
       "templating": {
         "list": [
           {
-            "current": {
-              "text": "Prometheus",
-              "value": "Prometheus"
-            },
-            "hide": 0,
-            "includeAll": false,
-            "label": null,
-            "multi": false,
-            "name": "datasource",
-            "options": [],
-            "query": "prometheus",
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "type": "datasource"
-          },
-          {
             "allValue": null,
             "current": {},
-            "datasource": "$datasource",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "label_values(kube_pod_info, cluster)",
             "hide": 2,
             "includeAll": false,
@@ -449,7 +441,7 @@ data:
           {
             "allValue": null,
             "current": {},
-            "datasource": "$datasource",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "label_values(kube_pod_info{cluster=\"$cluster\"}, namespace)",
             "hide": 0,
             "includeAll": false,
@@ -459,7 +451,7 @@ data:
             "options": [],
             "query": "label_values(kube_pod_info{cluster=\"$cluster\"}, namespace)",
             "refresh": 2,
-            "regex": "(selfservice)",
+            "regex": "",
             "skipUrlSync": false,
             "sort": 1,
             "tagValuesQuery": "",
@@ -471,15 +463,15 @@ data:
           {
             "allValue": null,
             "current": {},
-            "datasource": "$datasource",
-            "definition": "label_values(kube_pod_info{cluster=\"$cluster\", namespace=~\"$namespace\"}, pod)",
-            "hide": 0,
+            "datasource": "${DS_PROMETHEUS}",
+            "definition": "label_values(kube_pod_info{cluster=\"$cluster\", namespace=\"$namespace\"}, pod)",
+            "hide": 2,
             "includeAll": true,
             "label": "Pod",
             "multi": false,
             "name": "pod",
             "options": [],
-            "query": "label_values(kube_pod_info{cluster=\"$cluster\", namespace=~\"$namespace\"}, pod)",
+            "query": "label_values(kube_pod_info{cluster=\"$cluster\", namespace=\"$namespace\"}, pod)",
             "refresh": 2,
             "regex": "",
             "skipUrlSync": false,
@@ -523,4 +515,6 @@ data:
       },
       "timezone": "",
       "title": "Sample Resource Usage",
+      "uid": "GGqWKiNWk",
+      "version": 4
     }
