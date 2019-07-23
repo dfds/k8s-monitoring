@@ -17,7 +17,7 @@
 - [x] Update deployment script to use token replacement
 - [x] Make PowerShell deployment script
 - [x] Revise /README.md
-- [ ] Revise /grafana/README.md
+- [x] Revise /grafana/README.md
 - [ ] Create "How to get Slack Webhook URL" guide (Stanley)
 
 ## Installation
