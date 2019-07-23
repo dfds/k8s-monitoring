@@ -38,6 +38,12 @@ data:
           "id": "singlestat",
           "name": "Singlestat",
           "version": ""
+        },
+        {
+          "type": "panel",
+          "id": "text",
+          "name": "Text",
+          "version": ""
         }
       ],
       "annotations": {
@@ -66,7 +72,7 @@ data:
       "gnetId": null,
       "graphTooltip": 0,
       "id": null,
-      "iteration": 1563885377152,
+      "iteration": 1563887943523,
       "links": [],
       "panels": [
         {
@@ -435,7 +441,7 @@ data:
           "dashboardTags": [],
           "folderId": null,
           "gridPos": {
-            "h": 14,
+            "h": 11,
             "w": 3,
             "x": 0,
             "y": 8
@@ -873,6 +879,24 @@ data:
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "content": "\n<p style=\"font-size: 14px\">Showing alerts defined on all dashboards.\n<p style=\"font-size: 14px\">See also \"Sample Alerting\" dashboard.",
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 0,
+            "y": 19
+          },
+          "id": 21,
+          "links": [],
+          "mode": "html",
+          "options": {},
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
+          "transparent": true,
+          "type": "text"
         }
       ],
       "refresh": "30s",
@@ -1043,4 +1067,6 @@ data:
       },
       "timezone": "",
       "title": "Sample Namespace Overview",
+      "uid": "QUlpRNHWz",
+      "version": 4
     }
