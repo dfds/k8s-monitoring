@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1563883915441,
+  "iteration": 1563885377152,
   "links": [],
   "panels": [
     {
@@ -870,7 +870,9 @@
   "refresh": "30s",
   "schemaVersion": 18,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "sample"
+  ],
   "templating": {
     "list": [
       {
@@ -1032,7 +1034,7 @@
     ]
   },
   "timezone": "",
-  "title": "Sample Namespace Overview",
+  "title": "Namespace Overview",
   "uid": "QUlpRNHWz",
-  "version": 73
+  "version": 75
 }

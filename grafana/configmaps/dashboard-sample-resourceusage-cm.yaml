@@ -54,7 +54,7 @@ data:
       "gnetId": null,
       "graphTooltip": 0,
       "id": null,
-      "iteration": 1563884457623,
+      "iteration": 1563885419879,
       "links": [],
       "panels": [
         {
@@ -402,7 +402,9 @@ data:
       "refresh": "30s",
       "schemaVersion": 18,
       "style": "dark",
-      "tags": [],
+      "tags": [
+        "sample"
+      ],
       "templating": {
         "list": [
           {
@@ -520,7 +522,7 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Sample Resource Usage",
+      "title": "Resource Usage",
       "uid": "GGqWKiNWk",
-      "version": 14
+      "version": 16
     }
