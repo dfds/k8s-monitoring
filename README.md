@@ -6,15 +6,16 @@
     - [Pre-requisites](#pre-requisites)
     - [Installing Grafana](#installing-grafana)
       - [Preparing variables](#preparing-variables)
-    - [Using Grafana (rephrase)](#using-grafana-rephrase)
-      - [Generate dashboard configmaps](#generate-dashboard-configmaps)
+      - [Deploying Grafana](#deploying-grafana)
+        - [PowerShell](#powershell)
+        - [Bash](#bash)
 
 ## To do
 
 - [x] Description on how to export dashboards, and import as configmaps
 - [ ] How to enable scraping of capability apps metrics
 - [ ] Review sample dashboards
-- [ ] Update deployment script to use token replacement
+- [x] Update deployment script to use token replacement
 - [x] Make PowerShell deployment script
 - [ ] Revise /README.md
 - [ ] Revise /grafana/README.md
@@ -51,32 +52,31 @@ SLACK_URL: The token URL used for creating webhooks into your slack channel, use
 
 ADMIN_PASSWORD: The administrator password you want for your Grafana deployment, this will be saved as a secret in your kubernetes namespace.
 
-### Using Grafana (rephrase)
 
-#### Generate dashboard configmaps
+#### Deploying Grafana
 
-1. Save the dashboard JSON from Grafana using the "Share dashboard" function. Click the "Export" tab and tick "Export for sharing externally" on
-2. Use the configmap template, replacing "DASHBOARD_JSON" with the contents for the exported JSON (the contents need to be indented 4 spaces to fit the yaml structure)
-3. Apply the generated configmap using `kubectl`
 
-PowerShell:
+##### PowerShell
+
+Execute the script, giving it parameters like the example below:
 
 ```powershell
-# Define dashboard name - must be lowercase alphanum
-$DASHBOARD_NAME = 'grafana-dashboard-resourceusage'
-
-# Generate configmap, indenting JSON 4 spaces
-(Get-Content .\grafana\template-dashboard-cm.yaml) -replace "DASHBOARD_NAME",$DASHBOARD_NAME | Out-File .\grafana\configmaps\$($DASHBOARD_NAME)-cm.yaml
-'    ' + (Get-Content .\grafana\configmaps\$($DASHBOARD_NAME).json -Raw) -replace "`n","`n    " | Out-File .\grafana\configmaps\$($DASHBOARD_NAME)-cm.yaml -Append
+./deploy-grafana.ps1 -NAMESPACE 'capabilitynamespace-xyzvw' `
+-SLACK_CHANNEL 'channelname' `
+-SLACK_URL 'https://hooks.slack.com/services/XXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ' `
+-ADMIN_PASSWORD 'GrafanaAdminPassword' `
 ```
 
-Bash:
+##### Bash
+
+Before running the script file, make sure it has been given execution rights `chmod +x ./deploy-grafana.sh`
+
+Then execute the script giving it parameters like the example below:
 
 ```bash
-# Define dashboard name - must be lowercase alphanum
-DASHBOARD_NAME=grafana-dashboard-resourceusage
-
-# Generate configmap, indenting JSON 4 spaces
-cat ./grafana/template-dashboard-cm.yaml | sed "s/DASHBOARD_NAME/${DASHBOARD_NAME}/g" > ./grafana/configmaps/${DASHBOARD_NAME}.yaml
-cat ./grafana/configmaps/${DASHBOARD_NAME}.json | sed "s/^/    /g" >> ./grafana/configmaps/${DASHBOARD_NAME}.yaml
+NAMESPACE="capabilitynamespace-xyzvw" \
+SLACK_CHANNEL="channelname" \
+SLACK_URL="https://hooks.slack.com/services/XXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ" \
+ADMIN_PASSWORD="GrafanaAdminPassword" \
+./deploy-grafana.sh 
 ```
