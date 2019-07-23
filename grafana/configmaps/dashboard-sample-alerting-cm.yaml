@@ -5,29 +5,8 @@ metadata:
     grafana_dashboard: "1"
   name: dashboard-sample-alerting
 data:
-  dashboard.json: |-
+  dashboard-sample-alerting.json: |-
     {
-      "__inputs": [],
-      "__requires": [
-        {
-          "type": "grafana",
-          "id": "grafana",
-          "name": "Grafana",
-          "version": "6.2.5"
-        },
-        {
-          "type": "panel",
-          "id": "graph",
-          "name": "Graph",
-          "version": ""
-        },
-        {
-          "type": "panel",
-          "id": "text",
-          "name": "Text",
-          "version": ""
-        }
-      ],
       "annotations": {
         "list": [
           {
@@ -45,7 +24,8 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": null,
+      "id": 6,
+      "iteration": 1563888647076,
       "links": [],
       "panels": [
         {
