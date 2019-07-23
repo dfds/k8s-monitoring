@@ -7,10 +7,8 @@ Param (
 )
 
 # Generate variables from script input
-$KUBE_ROLE="$NAMESPACE-fullaccess"
 $env:TILLER_NAMESPACE=$NAMESPACE
 $ROOT_URL="https://%(domain)s/$NAMESPACE"
-$TillerServiceAccount = "$NAMESPACE" + ':tiller'
 
 (Get-Content ./grafana/template-helm-values.yaml -Raw) `
     -replace '\$NAMESPACE', $NAMESPACE `
@@ -19,21 +17,8 @@ $TillerServiceAccount = "$NAMESPACE" + ':tiller'
     -replace '\$SLACK_URL', $SLACK_URL `
     | Out-File -FilePath values.yaml -Encoding utf8
    
-Write-Output "Creating tiller service account"
-kubectl create serviceaccount --namespace $NAMESPACE tiller
-
-Write-Output  "Creating tiller rolebinding for service account"
-kubectl create rolebinding tiller --role=$KUBE_ROLE --serviceaccount=$TillerServiceAccount --namespace $NAMESPACE
-
-Write-Output  "Initializing tiller into namespace"
-helm init --service-account tiller
-
 Write-Output  "Applying configmaps"
 kubectl --namespace $NAMESPACE apply -f grafana/configmaps/
-
-Write-Output  "Waiting for tiller to finish deploying"
-
-sleep 20
 
 Write-Output "Creating secret 'grafana-password'"
 $secret="grafana-password"

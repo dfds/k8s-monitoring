@@ -25,20 +25,8 @@ function generate_values_yaml {
 
 generate_values_yaml
 
-echo "Creating tiller service account"
-kubectl create serviceaccount --namespace $NAMESPACE tiller
-
-echo "Creating tiller rolebinding for service account"
-kubectl create rolebinding tiller --role=$KUBE_ROLE --serviceaccount=$NAMESPACE:"tiller" -n $NAMESPACE
-
-echo "Initializing tiller into namespace"
-helm init --service-account tiller
-
 echo "Applying configmaps"
 kubectl -n $NAMESPACE apply -f grafana/configmaps/
-
-echo "Waiting for tiller to finish deploying"
-sleep 20
 
 echo "Creating secret 'grafana-password'"
 secret="grafana-password"
