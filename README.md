@@ -1,30 +1,24 @@
 # Kubernetes Monitoring for Capabilities
 
+- [Kubernetes Monitoring for Capabilities](#kubernetes-monitoring-for-capabilities)
+  - [To do](#to-do)
+  - [Installation](#installation)
+    - [Pre-requisites](#pre-requisites)
+    - [Installing Grafana](#installing-grafana)
+      - [Preparing variables](#preparing-variables)
+    - [Using Grafana (rephrase)](#using-grafana-rephrase)
+      - [Generate dashboard configmaps](#generate-dashboard-configmaps)
+
 ## To do
 
 - [x] Description on how to export dashboards, and import as configmaps
 - [ ] How to enable scraping of capability apps metrics
 - [ ] Review sample dashboards
 - [ ] Update deployment script to use token replacement
-- [ ] Make PowerShell deployment script
+- [x] Make PowerShell deployment script
 - [ ] Revise /README.md
 - [ ] Revise /grafana/README.md
 - [ ] Create "How to get Slack Webhook URL" guide
-
-## Introduction
-
-For a service to be successful, stability and reliability are key components.
-In order to achieve this, monitoring and alerting are required to ensure that you know about your services stability and reliability, and further more, allowing you to investigate when things don't behave as expected.
-
-## Getting started with monitoring and alerting
-
-For monitoring and alerting we recommend using Grafana. By deploying via helm as described in this playbook, you will end with the following "Out of the box":
-
-- Automatic datasource from a managed Prometheus
-- A set of default dashboards to get you started
-- Alerting to slack channel(s) of your choosing
-
-Your team will be responsible for running your own deployment of Grafana, the Prometheus datasource is provided by the platform.
 
 ## Installation
 
@@ -32,70 +26,30 @@ Your team will be responsible for running your own deployment of Grafana, the Pr
 
 Before you can install Grafana into your Kubernetes namespace through Helm, you must first:
 
-- Install Helm locally on your deployment machine
+- Install the Helm client on your deployment machine
 - Install Tiller into your Kubernetes namespace
+- Git installed on your deployment machine
+- PowerShell or Bash installed on your deployment machine
 
-#### Installing Helm
-
-https://github.com/helm/helm/releases
-
-
-#### Installing Tiller
-
-**Bash**:
-
-```bash
-export NAMESPACE=[CapabilityRootId]
-export TILLER_NAMESPACE=$NAMESPACE
-export KUBE_ROLE="$NAMESPACE-fullaccess"
-```
-
-**PowerShell**:
-
-```powershell
-$NAMESPACE = "[CapabilityRootId]"
-$env:TILLER_NAMESPACE = $NAMESPACE
-$KUBE_ROLE = "$NAMESPACE-fullaccess"
-```
-
-**Bash**:
-
-```bash
-# Create Kubernetes Service Account
-kubectl create serviceaccount --namespace $NAMESPACE tiller
-
-# Create Kubernetes Secret
-kubectl create rolebinding tiller --role=$KUBE_ROLE --serviceaccount=$NAMESPACE:tiller -n $NAMESPACE
-
-# Install Tiller
-helm init --service-account tiller
-```
-
-**PowerShell**:
-
-```powershell
-# Create Kubernetes Service Account
-kubectl create serviceaccount --namespace $NAMESPACE tiller
-
-# Create Kubernetes Secret
-kubectl create rolebinding tiller --role=$KUBE_ROLE --serviceaccount=$($NAMESPACE):$(tiller) -n $NAMESPACE
-
-# Install Tiller
-helm init --service-account tiller
-```
+For Helm and Tiller, guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
 
 ### Installing Grafana
 
-#### Configuring deployment file
+First, you must clone repository onto your deployment machine:
 
-Create a file and edit the following parameters
+1. `git clone https://github.com/dfds/k8s-monitoring.git`
+2. `cd k8s-monitoring`
 
-#### Deploying Grafana
+#### Preparing variables
 
-```bash
-# Install Grafana
-helm --namespace $NAMESPACE install stable/grafana --name grafana -f values.yaml
-```
+The deployment scripts requires that you supply 4 parameters:
+NAMESPACE: The Kubernetes namespace of you will be deploying Grafana into.
+
+SLACK_CHANNEL: The handle of the slack channel you wish to receive alerting into. By default we suggest your capability slack channel.
+
+SLACK_URL: The token URL used for creating webhooks into your slack channel, used for alerting. A guide on how to get the URL for your slack channel can be found here:
+
+ADMIN_PASSWORD: The administrator password you want for your Grafana deployment, this will be saved as a secret in your kubernetes namespace.
 
 ### Using Grafana (rephrase)
 
