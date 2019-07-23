@@ -6,8 +6,6 @@
     - [Pre-requisites](#pre-requisites)
     - [Preparing variables](#preparing-variables)
     - [Deploying Grafana](#deploying-grafana)
-      - [PowerShell](#powershell)
-      - [Bash](#bash)
 
 ## To do
 
@@ -18,25 +16,21 @@
 - [x] Make PowerShell deployment script
 - [x] Revise /README.md
 - [x] Revise /grafana/README.md
-- [ ] Create "How to get Slack Webhook URL" guide (Stanley)
+- [x] Create "How to get Slack Webhook URL" guide (Stanley)
 
 ## Installation
 
 ### Pre-requisites
 
-Before you can install Grafana into your Kubernetes namespace through Helm, you must first:
+1. You must setup your own fork of the repository in Azure DevOps [(Import Git Repository).](https://docs.microsoft.com/en-us/azure/devops/repos/git/import-git-repository?view=azure-devops)
+   - You should use your own forked version of the repository to save your own dashboard config maps down the road.
+2. Before you can install Grafana into your Kubernetes namespace through Helm, you must first:
+   - Install the Helm client on your deployment machine
+   - Install Tiller into your Kubernetes namespace
+   - Git installed on your deployment machine
+   - PowerShell or Bash installed on your deployment machine
 
-- Install the Helm client on your deployment machine
-- Install Tiller into your Kubernetes namespace
-- Git installed on your deployment machine
-- PowerShell or Bash installed on your deployment machine
-
-For Helm and Tiller, guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
-
-First, you must clone repository onto your deployment machine:
-
-1. `git clone https://github.com/dfds/k8s-monitoring.git`
-2. `cd k8s-monitoring`
+For Helm and Tiller, a guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
 
 ### Preparing variables
 
@@ -46,13 +40,20 @@ The deployment scripts requires that you supply 4 parameters:
 
 `SLACK_CHANNEL`: The handle of the slack channel you wish to receive alerting into. By default we suggest your capability slack channel.
 
-`SLACK_URL`: The token URL used for creating webhooks into your slack channel, used for alerting. A guide on how to get the URL for your slack channel can be found here:
+`SLACK_URL`: The URL for your slack apps incoming webhook. If your channel doesn't already have a webhook integrated app, you can [simply create one.](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack) 
 
 `ADMIN_PASSWORD`: The administrator password you want for your Grafana deployment, this will be saved as a secret in your kubernetes namespace.
 
 ### Deploying Grafana
 
-#### PowerShell
+Using the deployment script with the supplied parameters, it will do the following for you:
+
+* Generate a custom values.yaml file for your helm deployment and save it in the grafana folder as `values.yaml`.
+* Create a kubernetes secret called `grafana-password` containing the password you provide in the script.
+* Apply all configmaps inside of the `grafana/configmaps` folder (dashboards and datasources).
+* Deploy Grafana into your kubernetes namespace as a Helm deployment.
+
+**PowerShell:**
 
 Execute the script, giving it parameters like the example below:
 
@@ -63,7 +64,7 @@ Execute the script, giving it parameters like the example below:
 -ADMIN_PASSWORD 'GrafanaAdminPassword'
 ```
 
-#### Bash
+**Bash:**
 
 Before running the script file, make sure it has been given execution rights `chmod +x ./deploy-grafana.sh`
 
