@@ -1,5 +1,7 @@
 # Manual Installation
 
+If you wish to install Grafana manually without using the bootstrapper script in the root folder of this repository, this README file contains instructions.
+
 ## Pre-requisites
 
 - Install the Helm client on your deployment machine
