@@ -70,3 +70,21 @@ ADMIN_PASSWORD="GrafanaAdminPassword" \
 ```
 
 ## Setting up a CI Dashboard Pipeline
+
+Setting up your Continuous Integration Dashboard pipeline requires:
+
+1. [Creating a Kubernetes Service Connection](https://playbooks.dfds.cloud/deployment/k8s-service-connection.html) in your Azure DevOps project.
+   * A recommended name would be Kubernetes-YourNameSpaceName
+2. Changing **<YourKubernetesServiceConnection>** inside of the **azure-pipelines.yml** file so it matches your Kubernetes Service Connection.
+3. Create a new Azure DevOps pipeline based on the **azure-pipelines.yml** file:
+   1. Go to Pipelines -> Builds
+   2. Click New -> New build pipeline
+   3. Select Azure Repos Git (YAML)
+   4. Select the repository you have forked this project into
+   5. Choose Existing Azure Pipelines YAML file
+   6. In **Path** select **/azure-pipelines.yml**
+   7. Choose **RUN** and validate that the pipeline executes.
+
+Now, whenever you add a JSON file with a dashboard inside of the grafana/dashboards folder, it will automatically trigger the pipeline and deploy your dashboard.
+
+

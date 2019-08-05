@@ -18,13 +18,13 @@ steps:
       targetType: 'filePath'
       filePath: grafana/Convert-JSONToConfigmap.ps1
       errorActionPreference: 'stop'
-      pwsh: true # Optional
+      pwsh: true
       workingDirectory: grafana/
 
   - task: Kubernetes@1
     displayName: kubectl apply configmaps
     inputs:
       connectionType: Kubernetes Service Connection
-      kubernetesServiceEndpoint: Kubernetes-DemoPlayground
+      kubernetesServiceEndpoint: <YourKubernetesServiceConnection>
       command: apply
-      arguments: -f grafana/configmaps -o name
+      arguments: -f grafana/dashboards
