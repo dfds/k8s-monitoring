@@ -40,7 +40,7 @@ notifiers:
         # See  section for settings supporter for each
         # alert notification type.
         settings:
-          recipient: "#$SLACK_CHANNEL"
+          recipient: '#$SLACK_CHANNEL'
           uploadImage: true
           url: $SLACK_URL
           username: alertbot
