@@ -1,6 +1,8 @@
 # Import all JSON files in folder
 $JSONFiles = Get-ChildItem -Name -File -Filter '*.json' -Path ".\dashboards"
 
+Write-Output "Deploying the following ConfigMaps:"
+
 foreach ($File in $JSONFiles) {
     $DASHBOARD_NAME = ($File.Substring(0,$File.Length-19) -replace ' ','-').ToLower()
 
