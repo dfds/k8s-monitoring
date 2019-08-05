@@ -5,4 +5,4 @@ metadata:
     grafana_dashboard: "1"
   name: DASHBOARD_NAME
 data:
-  dashboard.json: |-
+  DASHBOARD_NAME.json: |-
