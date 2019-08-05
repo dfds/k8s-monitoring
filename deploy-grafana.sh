@@ -20,7 +20,7 @@ function render_template() {
 # Generate values.yaml file from template
 function generate_values_yaml {
   echo "Creating values.yaml file"
-  render_template grafana/template-helm-values.yaml > values.yaml
+  render_template grafana/templates/template-helm-values.yaml > values.yaml
 }
 
 generate_values_yaml

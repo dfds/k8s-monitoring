@@ -10,7 +10,7 @@ Param (
 $env:TILLER_NAMESPACE=$NAMESPACE
 $ROOT_URL="https://%(domain)s/$NAMESPACE"
 
-(Get-Content ./grafana/template-helm-values.yaml -Raw) `
+(Get-Content ./grafana/templates/template-helm-values.yaml -Raw) `
     -replace '\$NAMESPACE', $NAMESPACE `
     -replace '\$ROOT_URL', $ROOT_URL `
     -replace '\$SLACK_CHANNEL', $SLACK_CHANNEL `
