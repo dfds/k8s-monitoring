@@ -1,0 +1,30 @@
+# Pipeline deploying grafana dashboards as configmaps
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - grafana/dashboards/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: PowerShell@2
+    displayName: Converting json dashboards to configmaps
+    inputs:
+      targetType: 'filePath'
+      filePath: grafana/Convert-JSONToConfigmap.ps1
+      errorActionPreference: 'stop'
+      pwsh: true # Optional
+      workingDirectory: grafana/
+
+  - task: Kubernetes@1
+    displayName: kubectl apply configmaps
+    inputs:
+      connectionType: Kubernetes Service Connection
+      kubernetesServiceEndpoint: Kubernetes-DemoPlayground
+      command: apply
+      arguments: -f grafana/configmaps -o name
