@@ -1,22 +1,13 @@
 # Kubernetes Monitoring for Capabilities
 
+This repository is designed to be forked by your team, and contains scripts to bootstrap your Grafana deployment, and templates to setup a CI pipeline for easy deployment of your dashboards to Grafana in Kubernetes.
+
 - [Kubernetes Monitoring for Capabilities](#kubernetes-monitoring-for-capabilities)
-  - [To do](#to-do)
   - [Installation](#installation)
     - [Pre-requisites](#pre-requisites)
     - [Preparing variables](#preparing-variables)
     - [Deploying Grafana](#deploying-grafana)
-
-## To do
-
-- [x] Description on how to export dashboards, and import as configmaps
-- [ ] How to enable scraping of capability apps metrics
-- [ ] Review sample dashboards (Rasmus)
-- [x] Update deployment script to use token replacement
-- [x] Make PowerShell deployment script
-- [x] Revise /README.md
-- [x] Revise /grafana/README.md
-- [x] Create "How to get Slack Webhook URL" guide (Stanley)
+  - [Setting up a CI Dashboard Pipeline](#setting-up-a-ci-dashboard-pipeline)
 
 ## Installation
 
@@ -77,3 +68,5 @@ SLACK_URL="https://hooks.slack.com/services/XXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZZZ
 ADMIN_PASSWORD="GrafanaAdminPassword" \
 ./deploy-grafana.sh
 ```
+
+## Setting up a CI Dashboard Pipeline
