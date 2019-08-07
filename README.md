@@ -13,8 +13,8 @@ This repository is designed to be forked by your team, and contains scripts to b
 
 ### Pre-requisites
 
-1. You must setup your own fork of the repository in Azure DevOps [(Import Git Repository).](https://docs.microsoft.com/en-us/azure/devops/repos/git/import-git-repository?view=azure-devops)
-   - You should use your own forked version of the repository to save your own dashboard config maps down the road.
+1. You must setup your own clone of the repository in Azure DevOps [(Import Git Repository).](https://docs.microsoft.com/en-us/azure/devops/repos/git/import-git-repository?view=azure-devops)
+   - Your clone of this repository allows for easy version control of the deployment / dashboards.
 2. Before you can install Grafana into your Kubernetes namespace through Helm, you must first:
    - Install the Helm client on your deployment machine
    - Install Tiller into your Kubernetes namespace
@@ -31,7 +31,7 @@ The deployment scripts requires that you supply 4 parameters:
 
 `SLACK_CHANNEL`: The handle of the slack channel you wish to receive alerting into. By default we suggest your capability slack channel.
 
-`SLACK_URL`: The URL for your slack apps incoming webhook. If your channel doesn't already have a webhook integrated app, you can [simply create one.](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack) 
+`SLACK_URL`: The URL for your slack apps incoming webhook. If your channel doesn't already have a webhook integrated app, you can [simply create one.](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack)
 
 `ADMIN_PASSWORD`: The administrator password you want for your Grafana deployment, this will be saved as a secret in your kubernetes namespace.
 
@@ -39,10 +39,10 @@ The deployment scripts requires that you supply 4 parameters:
 
 Using the deployment script with the supplied parameters, it will do the following for you:
 
-* Generate a custom values.yaml file for your helm deployment and save it in the grafana folder as `values.yaml`.
-* Create a kubernetes secret called `grafana-password` containing the password you provide in the script.
-* Apply all configmaps inside of the `grafana/configmaps` folder (dashboards and datasources).
-* Deploy Grafana into your kubernetes namespace as a Helm deployment.
+- Generate a custom values.yaml file for your helm deployment and save it in the grafana folder as `values.yaml`.
+- Create a kubernetes secret called `grafana-password` containing the password you provide in the script.
+- Apply all configmaps inside of the `grafana/configmaps` folder (dashboards and datasources).
+- Deploy Grafana into your kubernetes namespace as a Helm deployment.
 
 **PowerShell:**
 
@@ -74,7 +74,7 @@ ADMIN_PASSWORD="GrafanaAdminPassword" \
 Setting up your Continuous Integration Dashboard pipeline requires:
 
 1. [Creating a Kubernetes Service Connection](https://playbooks.dfds.cloud/deployment/k8s-service-connection.html) in your Azure DevOps project.
-   * A recommended name would be Kubernetes-YourNameSpaceName
+   - A recommended name would be Kubernetes-YourNameSpaceName
 2. Changing **<YourKubernetesServiceConnection>** inside of the **azure-pipelines.yml** file so it matches your Kubernetes Service Connection.
 3. Create a new Azure DevOps pipeline based on the **azure-pipelines.yml** file:
    1. Go to Pipelines -> Builds
@@ -86,5 +86,3 @@ Setting up your Continuous Integration Dashboard pipeline requires:
    7. Choose **RUN** and validate that the pipeline executes.
 
 Now, whenever you add a JSON file with a dashboard inside of the grafana/dashboards folder, it will automatically trigger the pipeline and deploy your dashboard.
-
-
