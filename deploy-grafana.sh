@@ -26,7 +26,7 @@ function generate_values_yaml {
 generate_values_yaml
 
 echo "Applying configmaps"
-kubectl -n $NAMESPACE apply -f grafana/configmaps/
+kubectl --namespace $NAMESPACE apply -f grafana/configmaps/
 
 echo "Creating secret 'grafana-password'"
 secret="grafana-password"
@@ -34,3 +34,8 @@ kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=ad
 
 echo "Deploying Grafana through Helm"
 helm --namespace $NAMESPACE install stable/grafana --name grafana -f values.yaml --set admin.existingSecret="$secret"
+
+echo "Your can access your grafana the following information:"
+echo "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
+echo "Username: admin"
+echo "Password: Your Chosen Password from paramters"
