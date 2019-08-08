@@ -1,1 +1,2 @@
 /grafana/configmaps/sample-*.yaml
+values.yaml

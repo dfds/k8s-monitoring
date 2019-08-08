@@ -6,6 +6,10 @@ ingress:
   annotations:
     traefik.frontend.rule.type: PathPrefixStrip
 
+service:
+  labels:
+    delivered_by: devex
+
 grafana.ini:
   server:
     domain: grafana.hellman.oxygen.dfds.cloud
