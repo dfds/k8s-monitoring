@@ -5,7 +5,7 @@ data:
     datasources:
     - name: Prometheus
       type: prometheus
-      url: http://monitoring-prometheus-prometheus.monitoring.svc.cluster.local:9090
+      url: http://monitoring-prometheus-oper-prometheus.monitoring.svc.cluster.local:9090
       access: proxy
       isDefault: true
 kind: ConfigMap

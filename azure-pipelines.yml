@@ -27,4 +27,4 @@ steps:
       connectionType: Kubernetes Service Connection
       kubernetesServiceEndpoint: <YourKubernetesServiceConnection>
       command: apply
-      arguments: -f grafana/dashboards
+      arguments: -f grafana/configmaps
