@@ -411,7 +411,7 @@
         "frequency": "1m",
         "handler": 1,
         "name": "Failed request rate alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": []
       },
       "aliasColors": {},
@@ -564,7 +564,7 @@
         "frequency": "1m",
         "handler": 1,
         "name": "Consumer lag alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": []
       },
       "aliasColors": {},
@@ -922,7 +922,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
