@@ -607,7 +607,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(kafka_consumergroup_lag{topic=~\"build.capabilities\",consumergroup!=\"\",consumergroup!=\"iam-role-service-consumer\",consumergroup!=\"argojanitor-consumer-production\"}) by (topic,consumergroup)",
+          "expr": "sum(kafka_consumergroup_lag{topic=~\"build.*\",consumergroup!=\"\",consumergroup!=\"iam-role-service-consumer\",consumergroup!=\"argojanitor-consumer-production\"}) by (topic,consumergroup)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -863,7 +863,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(delta(kafka_topic_partition_current_offset{topic=~\"build.capabilities\"}[5m])/5) by (topic)",
+          "expr": "sum(delta(kafka_topic_partition_current_offset{topic=~\"build.*\"}[5m])/5) by (topic)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -953,5 +953,5 @@
   "timezone": "",
   "title": "Selfservice",
   "uid": "zSG7f34Wz",
-  "version": 7
+  "version": 8
 }
