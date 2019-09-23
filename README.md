@@ -11,6 +11,9 @@ This repository is designed to be forked by your team, and contains scripts to b
 
 ## Installation
 
+Going through the full installation guide, you will manually deploy the Grafana helm chart to your kubernetes namespace.
+Just doing the deployment does not give you the sample dashboards, for sample dashboards and a nice way to keep dashboards updated, make sure to also setup the CI pipeline described in the laster part.
+
 ### Pre-requisites
 
 1. You must setup your own clone of the repository in Azure DevOps [(Import Git Repository).](https://docs.microsoft.com/en-us/azure/devops/repos/git/import-git-repository?view=azure-devops)
