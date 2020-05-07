@@ -9,7 +9,6 @@ fi
 
 # Generate variables from script input
 KUBE_ROLE="$NAMESPACE-fullaccess"
-export TILLER_NAMESPACE=$NAMESPACE
 ROOT_URL="https://%(domain)s/$NAMESPACE"
 
 # Define function to render values.yaml template
@@ -33,7 +32,7 @@ secret="grafana-password"
 kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=admin-user=admin --from-literal=admin-password="$ADMIN_PASSWORD"
 
 echo "Deploying Grafana through Helm"
-helm --namespace $NAMESPACE install stable/grafana --name grafana -f values.yaml --set admin.existingSecret="$secret"
+helm --namespace $NAMESPACE upgrade --install grafana stable/grafana -f values.yaml --set admin.existingSecret="$secret"
 
 echo "Your can access your grafana the following information:"
 echo "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"

@@ -8,6 +8,9 @@ This repository is designed to be forked by your team, and contains scripts to b
     - [Preparing variables](#preparing-variables)
     - [Deploying Grafana](#deploying-grafana)
   - [Setting up a CI Dashboard Pipeline](#setting-up-a-ci-dashboard-pipeline)
+  - [Cleanup](#cleanup)
+    - [PowerShell](#powershell)
+    - [PowerShell](#powershell-1)
 
 ## Installation
 
@@ -20,11 +23,14 @@ Just doing the deployment does not give you the sample dashboards, for sample da
    - Your clone of this repository allows for easy version control of the deployment / dashboards.
 2. Before you can install Grafana into your Kubernetes namespace through Helm, you must first:
    - Install the Helm client on your deployment machine
-   - Install Tiller into your Kubernetes namespace
    - Git installed on your deployment machine
    - PowerShell or Bash installed on your deployment machine
 
-For Helm and Tiller, a guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
+For Helm, a guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
+
+*Important!*
+This repository now uses Helm version 3, which no longer requires a tiller server installed in your namespace.
+This repository is no longer compatible with Helm v2. In order to use the deployment scripts, please upgrade to Helm v3.
 
 ### Preparing variables
 
@@ -89,3 +95,31 @@ Setting up your Continuous Integration Dashboard pipeline requires:
    7. Choose **RUN** and validate that the pipeline executes.
 
 Now, whenever you add a JSON file with a dashboard inside of the grafana/dashboards folder, it will automatically trigger the pipeline and deploy your dashboard.
+
+## Cleanup
+
+If you want to remove the Grafana deployment from your namespace, run:
+
+### PowerShell
+
+```powershell
+$NAMESPACE="capabilitynamespace-xyzvw"
+helm delete grafana --namespace $NAMESPACE
+kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
+kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
+kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
+kubectl delete cm sample-namespace-overview --namespace $NAMESPACE
+kubectl delete cm sample-resource-usage --namespace $NAMESPACE
+```
+
+### PowerShell
+
+```bash
+NAMESPACE="capabilitynamespace-xyzvw"
+helm delete grafana --namespace $NAMESPACE
+kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
+kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
+kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
+kubectl delete cm sample-namespace-overview --namespace $NAMESPACE
+kubectl delete cm sample-resource-usage --namespace $NAMESPACE
+```

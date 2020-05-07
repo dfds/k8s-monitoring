@@ -17,9 +17,9 @@ grafana.ini:
     # serve_from_sub_path: true
 
 rbac:
-  namespaced: true
+  create: false
   pspEnabled: false
-  pspUseAppAmor: false
+  pspUseAppArmor: false
 
 sidecar:
   dashboards:

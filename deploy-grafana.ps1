@@ -7,7 +7,6 @@ Param (
 )
 
 # Generate variables from script input
-$env:TILLER_NAMESPACE=$NAMESPACE
 $ROOT_URL="https://%(domain)s/$NAMESPACE"
 
 (Get-Content ./grafana/templates/template-helm-values.yaml -Raw) `
@@ -25,7 +24,7 @@ $secret="grafana-password"
 kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=admin-user=admin --from-literal=admin-password="$ADMIN_PASSWORD"
 
 Write-Output "Deploying Grafana through Helm"
-helm --namespace $NAMESPACE install stable/grafana --name grafana -f values.yaml --set admin.existingSecret="$secret"
+helm --namespace $NAMESPACE upgrade --install grafana stable/grafana -f values.yaml --set admin.existingSecret="$secret"
 
 Write-Output "Your can access your grafana the following information:"
 Write-Output "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
