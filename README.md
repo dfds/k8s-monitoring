@@ -28,7 +28,7 @@ Just doing the deployment does not give you the sample dashboards, for sample da
 
 For Helm, a guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
 
-*Important!*
+**Important notice!**  
 This repository now uses Helm version 3, which no longer requires a tiller server installed in your namespace.
 This repository is no longer compatible with Helm v2. In order to use the deployment scripts, please upgrade to Helm v3.
 

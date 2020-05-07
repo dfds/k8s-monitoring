@@ -5,7 +5,6 @@ If you wish to install Grafana manually without using the bootstrapping script i
 ## Pre-requisites
 
 - Install the Helm client on your deployment machine
-- Install Tiller into your Kubernetes namespace
 
 ## Installing Grafana
 
