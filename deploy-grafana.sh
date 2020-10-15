@@ -31,10 +31,14 @@ echo "Creating secret 'grafana-password'"
 secret="grafana-password"
 kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=admin-user=admin --from-literal=admin-password="$ADMIN_PASSWORD"
 
+echo "Register Grafana Helm repo"
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
 echo "Deploying Grafana through Helm"
-helm --namespace $NAMESPACE upgrade --install grafana stable/grafana -f values.yaml --set admin.existingSecret="$secret"
+helm --namespace $NAMESPACE upgrade --install grafana grafana/grafana -f values.yaml --set admin.existingSecret="$secret"
 
 echo "Your can access your grafana the following information:"
 echo "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
 echo "Username: admin"
-echo "Password: Your Chosen Password from paramters"
+echo "Password: Your Chosen Password from parameters"
