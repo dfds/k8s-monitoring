@@ -104,7 +104,7 @@ If you want to remove the Grafana deployment from your namespace, run:
 
 ```powershell
 $NAMESPACE="capabilitynamespace-xyzvw"
-helm delete grafana --namespace $NAMESPACE
+helm uninstall grafana --namespace $NAMESPACE
 kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
 kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
 kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
@@ -116,7 +116,7 @@ kubectl delete cm sample-resource-usage --namespace $NAMESPACE
 
 ```bash
 NAMESPACE="capabilitynamespace-xyzvw"
-helm delete grafana --namespace $NAMESPACE
+helm uninstall grafana --namespace $NAMESPACE
 kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
 kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
 kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
