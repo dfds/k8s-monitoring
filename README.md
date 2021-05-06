@@ -26,7 +26,7 @@ Just doing the deployment does not give you the sample dashboards, for sample da
    - Git installed on your deployment machine
    - PowerShell or Bash installed on your deployment machine
 
-For Helm, a guide can be found in the [DFDS Helm Playbook.](https://playbooks.dfds.cloud/kubernetes/helm.html)
+For Helm, a guide can be found in the [DFDS Helm Playbook.](https://wiki.dfds.cloud/en/playbooks/deployment/k8s-helm-howto)
 
 **Important notice!**  
 This repository now uses Helm version 3, which no longer requires a tiller server installed in your namespace.
@@ -82,7 +82,7 @@ ADMIN_PASSWORD="GrafanaAdminPassword" \
 
 Setting up your Continuous Integration Dashboard pipeline requires:
 
-1. [Creating a Kubernetes Service Connection](https://playbooks.dfds.cloud/deployment/k8s-service-connection.html) in your Azure DevOps project.
+1. [Creating a Kubernetes Service Connection](https://wiki.dfds.cloud/en/playbooks/deployment/k8s-service-connection) in your Azure DevOps project.
    - A recommended name would be Kubernetes-YourNameSpaceName
 2. Changing **<YourKubernetesServiceConnection>** inside of the **azure-pipelines.yml** file so it matches your Kubernetes Service Connection.
 3. Create a new Azure DevOps pipeline based on the **azure-pipelines.yml** file:
