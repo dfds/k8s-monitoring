@@ -1,2 +1,3 @@
 /grafana/configmaps/sample-*.yaml
 values.yaml
+ingressroute.yaml
