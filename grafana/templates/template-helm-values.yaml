@@ -1,10 +1,8 @@
 ingress:
-  enabled: true
+  enabled: false
   path: /$NAMESPACE
   hosts:
   - grafana.hellman.oxygen.dfds.cloud
-  annotations:
-    traefik.frontend.rule.type: PathPrefixStrip
 
 service:
   labels:
