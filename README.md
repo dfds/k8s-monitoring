@@ -10,7 +10,7 @@ This repository is designed to be forked by your team, and contains scripts to b
   - [Setting up a CI Dashboard Pipeline](#setting-up-a-ci-dashboard-pipeline)
   - [Cleanup](#cleanup)
     - [PowerShell](#powershell)
-    - [PowerShell](#powershell-1)
+    - [Bash](#bash)
 
 ## Installation
 
@@ -28,7 +28,7 @@ Just doing the deployment does not give you the sample dashboards, for sample da
 
 For Helm, a guide can be found in the [DFDS Helm Playbook.](https://wiki.dfds.cloud/en/playbooks/deployment/k8s-helm-howto)
 
-**Important notice!**  
+**Important notice!**
 This repository now uses Helm version 3, which no longer requires a tiller server installed in your namespace.
 This repository is no longer compatible with Helm v2. In order to use the deployment scripts, please upgrade to Helm v3.
 
@@ -105,21 +105,25 @@ If you want to remove the Grafana deployment from your namespace, run:
 ```powershell
 $NAMESPACE="capabilitynamespace-xyzvw"
 helm uninstall grafana --namespace $NAMESPACE
-kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
-kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
-kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
+kubectl delete secret grafana-password --namespace $NAMESPACE
+kubectl delete cm grafana-datasource --namespace $NAMESPACE
+kubectl delete cm sample-alerting --namespace $NAMESPACE
 kubectl delete cm sample-namespace-overview --namespace $NAMESPACE
 kubectl delete cm sample-resource-usage --namespace $NAMESPACE
+kubectl delete ingressroute grafana --namespace $NAMESPACE
+kubectl delete middleware grafana-mw --namespace $NAMESPACE
 ```
 
-### PowerShell
+### Bash
 
 ```bash
 NAMESPACE="capabilitynamespace-xyzvw"
 helm uninstall grafana --namespace $NAMESPACE
-kubectl delete secret grafana-password -namespace --namespace $NAMESPACE
-kubectl delete cm grafana-datasource -namespace --namespace $NAMESPACE
-kubectl delete cm sample-alerting -namespace --namespace $NAMESPACE
+kubectl delete secret grafana-password --namespace $NAMESPACE
+kubectl delete cm grafana-datasource --namespace $NAMESPACE
+kubectl delete cm sample-alerting --namespace $NAMESPACE
 kubectl delete cm sample-namespace-overview --namespace $NAMESPACE
 kubectl delete cm sample-resource-usage --namespace $NAMESPACE
+kubectl delete ingressroute grafana --namespace $NAMESPACE
+kubectl delete middleware grafana-mw --namespace $NAMESPACE
 ```

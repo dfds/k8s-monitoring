@@ -15,7 +15,7 @@ $ROOT_URL="https://%(domain)s/$NAMESPACE"
     -replace '\$SLACK_CHANNEL', $SLACK_CHANNEL `
     -replace '\$SLACK_URL', $SLACK_URL `
     | Out-File -FilePath values.yaml -Encoding utf8
-   
+
 Write-Output  "Applying configmaps"
 kubectl --namespace $NAMESPACE apply -f grafana/configmaps/
 
@@ -30,7 +30,16 @@ helm repo update
 Write-Output "Deploying Grafana through Helm"
 helm --namespace $NAMESPACE upgrade --install grafana grafana/grafana -f values.yaml --set admin.existingSecret="$secret"
 
+# Generate ingressroute.yaml file from template
+(Get-Content ./grafana/templates/template-traefik-ingressroute.yaml -Raw) `
+    -replace '\$NAMESPACE', $NAMESPACE `
+    -replace "'", '`' `
+    | Out-File -FilePath ingressroute.yaml -Encoding utf8
+
+Write-Output "Deploying Traefik V2 IngressRoute and Middleware"
+kubectl --namespace $NAMESPACE apply -f ingressroute.yaml
+
 Write-Output "Your can access your grafana the following information:"
 Write-Output "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
 Write-Output "Username: admin"
-Write-Output "Password: Your Chosen Password from paramters"
+Write-Output "Password: Your Chosen Password from parameters"

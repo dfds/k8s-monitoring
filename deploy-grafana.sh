@@ -38,6 +38,20 @@ helm repo update
 echo "Deploying Grafana through Helm"
 helm --namespace $NAMESPACE upgrade --install grafana grafana/grafana -f values.yaml --set admin.existingSecret="$secret"
 
+# Generate ingressroute.yaml file from template
+function generate_ingressroute_yaml {
+  echo "Creating ingressroute.yaml file"
+  render_template grafana/templates/template-traefik-ingressroute.yaml > ingressroute.yaml
+}
+
+generate_ingressroute_yaml
+
+echo "Set the correct quote sympbols in ingressroute.yaml"
+sed -i "s/'/\`/g" ingressroute.yaml
+
+echo "Deploying Traefik V2 IngressRoute and Middleware"
+kubectl --namespace $NAMESPACE apply -f ingressroute.yaml
+
 echo "Your can access your grafana the following information:"
 echo "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
 echo "Username: admin"
