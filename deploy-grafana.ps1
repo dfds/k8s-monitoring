@@ -42,4 +42,4 @@ kubectl --namespace $NAMESPACE apply -f ingressroute.yaml
 Write-Output "Your can access your grafana the following information:"
 Write-Output "URL: https://grafana.hellman.oxygen.dfds.cloud/$NAMESPACE"
 Write-Output "Username: admin"
-Write-Output "Password: Your Chosen Password from paramters"
+Write-Output "Password: Your Chosen Password from parameters"
