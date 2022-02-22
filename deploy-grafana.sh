@@ -29,7 +29,7 @@ kubectl --namespace $NAMESPACE apply -f grafana/configmaps/
 
 echo "Creating secret 'grafana-password'"
 secret="grafana-password"
-kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=admin-user=admin --from-literal=admin-password="$ADMIN_PASSWORD"
+kubectl --namespace $NAMESPACE create secret generic "$secret" --from-literal=admin-user=admin --from-literal=admin-password="$ADMIN_PASSWORD" --dry-run=client -o yaml | kubectl apply -f -
 
 echo "Register Grafana Helm repo"
 helm repo add grafana https://grafana.github.io/helm-charts
