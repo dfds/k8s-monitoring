@@ -47,3 +47,11 @@ notifiers:
           uploadImage: true
           url: $SLACK_URL
           username: alertbot
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
