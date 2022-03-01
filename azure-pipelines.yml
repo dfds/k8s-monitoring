@@ -25,6 +25,6 @@ steps:
     displayName: kubectl apply configmaps
     inputs:
       connectionType: Kubernetes Service Connection
-      kubernetesServiceEndpoint: <YourKubernetesServiceConnection>
+      kubernetesServiceEndpoint: hellman-mlops-deploy
       command: apply
       arguments: -f grafana/configmaps
