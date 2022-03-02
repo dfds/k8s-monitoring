@@ -17,9 +17,9 @@ You must log in with the shared credentials. They are found
 ## Adding and deploying dashboards
 
 Dashboards should be created/modified in the UI, then saved as JSON and put in the dashboards folder
-(/grafana/dashboards). You can save the dashboard as JSON in the UI by going to settings and copying
-the "JSON Model" text into a file. The pipeline will convert them to configmaps and they should be
-persisted in k8s this way. The JSON dashboards are converted to configmaps with a
+(/grafana/dashboards). You can save the dashboard configuration as JSON in the UI by going to
+settings and copying the "JSON Model" text into a file. The pipeline will convert them to configmaps
+and they should be persisted in k8s this way. The JSON dashboards are converted to configmaps with a
 [powershell script](./grafana/Convert-JSONToConfigmap.ps1), and deployed using
 [azure pipelines](./azure-pipelines.yml).
 
