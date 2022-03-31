@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -209,7 +208,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "kube_deployment_status_replicas_available{deployment=~\"(.*apt-production)|(.*vessel-eta-production)\"}",
+          "expr": "sum by(deployment)(kube_deployment_status_replicas_available{deployment=~\"(.*apt-production)|(.*vessel-eta-production)\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "{{deployment}}",
@@ -321,6 +320,6 @@
   "timezone": "browser",
   "title": "APT",
   "uid": "_jbWHWy7z",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }
