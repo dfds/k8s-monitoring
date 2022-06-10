@@ -25,55 +25,29 @@
   "liveNow": false,
   "panels": [
     {
-      "description": "If both backend and frontend are healthy, the value should be 2. ",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "fillOpacity": 70,
+            "lineWidth": 0
           },
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 1.5
               }
             ]
-          }
+          },
+          "unit": "bool_on_off"
         },
         "overrides": []
       },
@@ -85,15 +59,19 @@
       },
       "id": 2,
       "options": {
+        "alignValue": "left",
         "legend": {
-          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
         "tooltip": {
           "mode": "single"
         }
       },
+      "pluginVersion": "8.3.6",
       "targets": [
         {
           "datasource": {
@@ -101,52 +79,42 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum by(service)(up{namespace=\"logistics-quotes-eqxam\",service=~\"quote-tenders|quote-tenders-backend\"})",
+          "expr": "sum(up{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"})",
+          "hide": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Backend",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(up{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Frontend",
+          "refId": "B"
         }
       ],
       "title": "Quote Tender Prod uptime",
-      "type": "timeseries"
+      "type": "state-timeline"
     },
     {
-      "description": "If both backend and frontend are healthy, the value should be 2. ",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "fillOpacity": 70,
+            "lineWidth": 0
           },
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -156,10 +124,11 @@
               },
               {
                 "color": "red",
-                "value": 1.5
+                "value": 80
               }
             ]
-          }
+          },
+          "unit": "bool_on_off"
         },
         "overrides": []
       },
@@ -171,11 +140,14 @@
       },
       "id": 4,
       "options": {
+        "alignValue": "left",
         "legend": {
-          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
         "tooltip": {
           "mode": "single"
         }
@@ -187,48 +159,33 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum by(service)(up{namespace=\"logistics-quote-stagin-zlpxz\",service=~\"quote-tenders|quote-tenders-backend\"})",
+          "expr": "sum(up{namespace=\"logistics-quote-stagin-zlpxz\",service=~\"quote-tenders-backend\"})",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Backend",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(up{namespace=\"logistics-quote-stagin-zlpxz\",service=~\"quote-tenders\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Frontend",
+          "refId": "B"
         }
       ],
       "title": "Quote Tender Staging uptime",
-      "type": "timeseries"
+      "type": "state-timeline"
     },
     {
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -243,7 +200,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -255,15 +213,20 @@
       },
       "id": 5,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "textMode": "auto"
       },
+      "pluginVersion": "8.3.6",
       "targets": [
         {
           "datasource": {
@@ -278,41 +241,14 @@
         }
       ],
       "title": "Number of quotes calculated with tender tool",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -321,13 +257,10 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -339,15 +272,20 @@
       },
       "id": 8,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "textMode": "auto"
       },
+      "pluginVersion": "8.3.6",
       "targets": [
         {
           "datasource": {
@@ -362,7 +300,7 @@
         }
       ],
       "title": "Number of distance calculations with tender tool",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
       "fieldConfig": {
@@ -372,7 +310,7 @@
           },
           "custom": {
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "left",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -399,19 +337,17 @@
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -421,7 +357,7 @@
         "x": 0,
         "y": 17
       },
-      "id": 10,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -432,6 +368,7 @@
           "mode": "single"
         }
       },
+      "pluginVersion": "8.3.6",
       "targets": [
         {
           "datasource": {
@@ -439,50 +376,21 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "flask_http_request_total{namespace=\"logistics-quotes-eqxam\", service=\"quote-tenders\"}",
+          "expr": "sum(rate(process_cpu_seconds_total{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"}[1m]))",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "backend CPU usage",
           "refId": "A"
         }
       ],
-      "title": "Request counts",
+      "title": "CPU Usage",
       "type": "timeseries"
     },
     {
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -491,11 +399,16 @@
                 "value": null
               },
               {
+                "color": "#EAB839",
+                "value": 2000000000
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 3000000000
               }
             ]
-          }
+          },
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -505,33 +418,37 @@
         "x": 12,
         "y": 17
       },
-      "id": 12,
+      "id": 16,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "textMode": "auto"
       },
+      "pluginVersion": "8.3.6",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "exemplar": false,
-          "expr": "flask_http_request_duration_seconds_sum{}",
-          "instant": true,
+          "exemplar": true,
+          "expr": "sum(process_virtual_memory_bytes{namespace=\"logistics-quotes-eqxam\", service=\"quote-tenders-backend\"})",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Memory usages backend",
           "refId": "A"
         }
       ],
-      "title": "Request duration",
-      "type": "timeseries"
+      "title": "Memory usage",
+      "type": "stat"
     }
   ],
   "refresh": "",
