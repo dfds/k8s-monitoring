@@ -24,22 +24,19 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 3,
+    "id": 2,
     "links": [],
     "liveNow": false,
     "panels": [
         {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-            },
+            "description": "",
             "fieldConfig": {
                 "defaults": {
                     "color": {
                         "mode": "palette-classic"
                     },
                     "custom": {
-                        "axisLabel": "Duration [s]",
+                        "axisLabel": "",
                         "axisPlacement": "auto",
                         "barAlignment": 0,
                         "drawStyle": "line",
@@ -51,8 +48,182 @@
                             "viz": false
                         },
                         "lineInterpolation": "linear",
-                        "lineWidth": 1,
+                        "lineWidth": 3,
                         "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 8,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.3.6",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "exemplar": true,
+                    "expr": "sum(increase(num_optimize_failures_total{service=\"cargoallocation-app-production\", namespace=\"terminal-cargoallocati-zamrl\"}[1d]))",
+                    "format": "time_series",
+                    "instant": false,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A"
+                }
+            ],
+            "title": "Failures per day",
+            "type": "timeseries"
+        },
+        {
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "points",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 2,
+                        "pointSize": 10,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "always",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 8
+            },
+            "id": 6,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "exemplar": true,
+                    "expr": "sum by (vessel_id) (increase(num_units{}[$__rate_interval]))",
+                    "interval": "",
+                    "legendFormat": "{{vessel_id}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Number of units",
+            "type": "timeseries"
+        },
+        {
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "Duration [s]",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "points",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 3,
+                        "pointSize": 10,
                         "scaleDistribution": {
                             "type": "linear"
                         },
@@ -87,7 +258,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 0
+                "y": 16
             },
             "id": 4,
             "options": {
@@ -109,7 +280,11 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "optimizer_task_duration{}",
+                    "expr": "sum by (task,vessel_id) (increase(optimizer_task_duration{}[$__rate_interval]))",
+                    "format": "time_series",
+                    "instant": false,
+                    "interval": "",
+                    "intervalFactor": 1,
                     "legendFormat": "{{task}}-{{vessel_id}}",
                     "range": true,
                     "refId": "A"
@@ -119,10 +294,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -141,7 +312,7 @@
                             "viz": false
                         },
                         "lineInterpolation": "linear",
-                        "lineWidth": 1,
+                        "lineWidth": 2,
                         "pointSize": 5,
                         "scaleDistribution": {
                             "type": "linear"
@@ -177,7 +348,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 0,
-                "y": 8
+                "y": 24
             },
             "id": 2,
             "options": {
@@ -198,31 +369,34 @@
                         "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
-                    "expr": "num_optimize_tasks_total{}",
+                    "exemplar": true,
+                    "expr": "sum by (vessel_id) (increase(num_optimize_tasks_total{service=\"cargoallocation-app-production\", namespace=\"terminal-cargoallocati-zamrl\"}[1y]))",
+                    "instant": false,
+                    "interval": "",
                     "legendFormat": "{{vessel_id}}",
                     "range": true,
                     "refId": "A"
                 }
             ],
-            "title": "Optimizations tasks started",
+            "title": "Optimizations tasks started over a year",
             "type": "timeseries"
         }
     ],
     "refresh": "",
-    "schemaVersion": 36,
+    "schemaVersion": 34,
     "style": "dark",
     "tags": [],
     "templating": {
         "list": []
     },
     "time": {
-        "from": "now-7d",
+        "from": "now-30d",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "optimization tasks",
     "uid": "jaOcDOlnz",
-    "version": 2,
+    "version": 1,
     "weekStart": ""
 }
