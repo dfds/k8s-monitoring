@@ -60,6 +60,7 @@
         "noDataState": "no_data",
         "notifications": []
       },
+      "description": "Boolean returning 0 if down and 1 if up ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -152,6 +153,7 @@
       "type": "timeseries"
     },
     {
+      "description": "Shows the number of times that the model has been asked for predictions",
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -227,6 +229,6 @@
   "timezone": "",
   "title": "Freight overbooking",
   "uid": "L0YPTDC7k",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
