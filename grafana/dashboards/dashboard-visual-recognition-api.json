@@ -26,6 +26,42 @@
   "liveNow": false,
   "panels": [
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.001
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "CPU usage on Visual Recognition API is above expected levels. \nTagging: Dennis Hansen, Kasper Lauritzen",
+        "name": "CPU Usage alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -108,6 +144,14 @@
           "interval": "",
           "legendFormat": "",
           "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 0.001,
+          "visible": true
         }
       ],
       "title": "CPU Usage",
@@ -251,6 +295,6 @@
   "timezone": "",
   "title": "Visual Recognition API",
   "uid": "D2VHu0Cnz",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
