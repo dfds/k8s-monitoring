@@ -42,7 +42,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-RdYlGr"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "fillOpacity": 70,
@@ -55,6 +55,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
@@ -93,18 +97,6 @@
           "interval": "",
           "legendFormat": "Backend",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "sum(kube_pod_container_status_ready{namespace=\"ferry-cancellation-for-jpoxj\", container=\"overbooking-frontend\"})",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Frontend",
-          "refId": "B"
         }
       ],
       "title": "Up time",
@@ -155,6 +147,7 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "8.3.6",
@@ -165,7 +158,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(n_row_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[10y]))",
+          "expr": "sum(increase(n_row_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[100y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -182,7 +175,6 @@
             "mode": "fixed"
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -223,7 +215,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "OB_predictions_bucket{le!=\"+Inf\"}",
+          "expr": "OB_predictions_bucket",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
@@ -238,7 +230,6 @@
       "description": "Shows the number of times that the model has been asked for predictions",
       "fieldConfig": {
         "defaults": {
-          "decimals": 0,
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -287,7 +278,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(n_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[10y]))",
+          "expr": "sum(increase(n_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[100y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -434,7 +425,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_resident_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=\"overbooking-api\"})",
+          "expr": "sum(process_virtual_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=\"overbooking-api\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "Memory usages backend",
@@ -453,7 +444,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
