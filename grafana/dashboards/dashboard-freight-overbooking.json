@@ -165,7 +165,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(n_row_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[$__range]))",
+          "expr": "sum(increase(n_row_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[10y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -238,6 +238,7 @@
       "description": "Shows the number of times that the model has been asked for predictions",
       "fieldConfig": {
         "defaults": {
+          "decimals": 0,
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -286,7 +287,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(n_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"})",
+          "expr": "sum(increase(n_times_generated_total{namespace=\"ferry-cancellation-for-jpoxj\", service=\"overbooking-api\"}[10y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
