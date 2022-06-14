@@ -42,7 +42,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
             "fillOpacity": 70,
@@ -55,10 +55,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -97,6 +93,18 @@
           "interval": "",
           "legendFormat": "Backend",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(kube_pod_container_status_ready{namespace=\"ferry-cancellation-for-jpoxj\", container=\"overbooking-frontend\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Frontend",
+          "refId": "B"
         }
       ],
       "title": "Up time",
@@ -174,6 +182,7 @@
             "mode": "fixed"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -214,7 +223,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "OB_predictions_bucket",
+          "expr": "OB_predictions_bucket{le!=\"+Inf\"}",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
@@ -424,7 +433,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_virtual_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=\"overbooking-api\"})",
+          "expr": "sum(process_resident_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=\"overbooking-api\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "Memory usages backend",
@@ -443,13 +452,13 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Freight overbooking",
   "uid": "L0YPTDC7k",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
