@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -205,7 +204,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_virtual_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\"})",
+          "expr": "sum(process_resident_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -279,6 +278,63 @@
       ],
       "title": "Uptime",
       "type": "state-timeline"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"}",
+          "format": "heatmap",
+          "interval": "",
+          "legendFormat": "{{le}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Response time in seconds, extract_unitnumbers",
+      "type": "bargauge"
     }
   ],
   "schemaVersion": 34,
@@ -295,6 +351,6 @@
   "timezone": "",
   "title": "Visual Recognition API",
   "uid": "D2VHu0Cnz",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
