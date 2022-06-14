@@ -234,7 +234,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(n_indiviual_quotes_total{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"}[$__range]))",
+          "expr": "sum(increase(n_indiviual_quotes_total{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"}[1y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -293,7 +293,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(n_individual_distances_total{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"}[$__range]))",
+          "expr": "sum(increase(n_individual_distances_total{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"}[1y]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -441,7 +441,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_virtual_memory_bytes{namespace=\"logistics-quotes-eqxam\", service=\"quote-tenders-backend\"})",
+          "expr": "sum(process_resident_memory_bytes{namespace=\"logistics-quotes-eqxam\", service=\"quote-tenders-backend\"})",
           "interval": "",
           "legendFormat": "Memory usages backend",
           "refId": "A"
@@ -466,6 +466,6 @@
   "timezone": "",
   "title": "Logistics Quote Tenders",
   "uid": "aec6InYnz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
