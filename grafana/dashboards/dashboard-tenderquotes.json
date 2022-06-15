@@ -25,6 +25,170 @@
   "liveNow": false,
   "panels": [
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.8
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                0.8
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "or"
+            },
+            "query": {
+              "params": [
+                "B",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Logistics Tenders Production is down",
+        "name": "Log Tenders Uptime",
+        "noDataState": "alerting",
+        "notifications": []
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(up{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders\"})",
+          "interval": "",
+          "legendFormat": "frontend",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(up{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders-backend\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "backend",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "lt",
+          "value": 0.8,
+          "visible": true
+        }
+      ],
+      "title": "Dashboard for Alarms",
+      "type": "timeseries"
+    },
+    {
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -55,7 +219,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 2,
       "options": {
@@ -136,7 +300,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 1
       },
       "id": 4,
       "options": {
@@ -188,6 +352,7 @@
             "mode": "fixed"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -209,7 +374,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 10
       },
       "id": 5,
       "options": {
@@ -251,6 +416,7 @@
             "mode": "fixed"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -268,7 +434,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 10
       },
       "id": 8,
       "options": {
@@ -303,6 +469,7 @@
       "type": "stat"
     },
     {
+      "description": "1 min average load",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -355,7 +522,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 18
       },
       "id": 14,
       "options": {
@@ -382,7 +549,7 @@
           "refId": "A"
         }
       ],
-      "title": "CPU Usage",
+      "title": "CPU Usage, backend",
       "type": "timeseries"
     },
     {
@@ -416,7 +583,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 18
       },
       "id": 16,
       "options": {
@@ -447,7 +614,7 @@
           "refId": "A"
         }
       ],
-      "title": "Memory usage",
+      "title": "Memory usage, backend",
       "type": "stat"
     }
   ],
@@ -459,13 +626,13 @@
     "list": []
   },
   "time": {
-    "from": "now-30d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Logistics Quote Tenders",
   "uid": "aec6InYnz",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
