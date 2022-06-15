@@ -226,6 +226,7 @@
           },
           "mappings": [],
           "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -286,6 +287,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -300,7 +302,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 8
@@ -311,7 +313,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "delta"
           ],
           "fields": "",
           "values": false
@@ -326,7 +328,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"}",
+          "expr": "sum by (le)(visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"})",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
@@ -344,13 +346,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Visual Recognition API",
   "uid": "D2VHu0Cnz",
-  "version": 6,
+  "version": 1,
   "weekStart": ""
 }
