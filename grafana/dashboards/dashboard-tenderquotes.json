@@ -56,7 +56,7 @@
               "params": [
                 0.8
               ],
-              "type": "gt"
+              "type": "lt"
             },
             "operator": {
               "type": "or"
@@ -160,6 +160,7 @@
           },
           "exemplar": true,
           "expr": "sum(up{namespace=\"logistics-quotes-eqxam\",service=\"quote-tenders\"})",
+          "hide": false,
           "interval": "",
           "legendFormat": "frontend",
           "refId": "A"
@@ -633,6 +634,6 @@
   "timezone": "",
   "title": "Logistics Quote Tenders",
   "uid": "aec6InYnz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
