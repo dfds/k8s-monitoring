@@ -201,9 +201,10 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-greens"
+            "mode": "thresholds"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -213,7 +214,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 200000000
               }
             ]
           },
@@ -240,7 +241,6 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "8.3.6",
@@ -251,7 +251,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_resident_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=\"overbooking-api\"})",
+          "expr": "sum(process_resident_memory_bytes{namespace=\"ferry-cancellation-for-jpoxj\",service=~\"overbooking-api\"}) ",
           "instant": false,
           "interval": "",
           "legendFormat": "Memory usages backend",
@@ -420,7 +420,7 @@
         "orientation": "vertical",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "delta"
           ],
           "fields": "",
           "values": false
@@ -436,7 +436,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "OB_predictions_bucket{le!=\"+Inf\"}",
+          "expr": "sum by (le)(OB_predictions_bucket{le!=\"+Inf\"})",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
@@ -463,6 +463,6 @@
   "timezone": "",
   "title": "Freight overbooking",
   "uid": "L0YPTDC7k",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }
