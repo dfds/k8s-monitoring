@@ -111,44 +111,77 @@
       "type": "timeseries"
     },
     {
+      "description": "How many requests ends up with a unitnumber in the response (percent) the last hour.",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-YlBl"
+            "mode": "continuous-BlYlRd"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1.2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 27,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
       },
-      "id": 8,
+      "id": 14,
       "options": {
-        "displayMode": "lcd",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "delta"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
         },
-        "showUnfilled": true
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "pluginVersion": "8.3.6",
       "targets": [
@@ -158,26 +191,14 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum by (le)(visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"})",
-          "format": "heatmap",
+          "expr": "sum(increase(visual_recognition_returned_unitnumbers_sum[1h])) /  sum(increase(visual_recognition_returned_unitnumbers_count[1h]))\r\n\r\n\r\n\r\n",
           "interval": "",
-          "legendFormat": "{{le}}",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Response time in seconds, extract_unitnumbers",
-      "type": "bargauge"
-    },
-    {
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
-      "id": 10,
-      "title": "Row title",
-      "type": "row"
+      "title": "Fraction of requests with a unitnumber returned",
+      "type": "timeseries"
     },
     {
       "alert": {
@@ -270,10 +291,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 8
       },
       "id": 6,
       "options": {
@@ -312,9 +333,11 @@
       "type": "timeseries"
     },
     {
-      "description": "Virtual memory",
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "continuous-YlBl"
+          },
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -326,30 +349,28 @@
               }
             ]
           },
-          "unit": "decbits"
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 8
       },
-      "id": 4,
+      "id": 8,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
+        "displayMode": "lcd",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "delta"
           ],
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showUnfilled": true
       },
       "pluginVersion": "8.3.6",
       "targets": [
@@ -359,15 +380,26 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_resident_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\"})",
+          "expr": "sum by (le)(visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"})",
+          "format": "heatmap",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{le}}",
           "refId": "A"
         }
       ],
-      "title": "Memory usage",
-      "transparent": true,
-      "type": "stat"
+      "title": "Response time in seconds, extract_unitnumbers",
+      "type": "bargauge"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 10,
+      "title": "Row title",
+      "type": "row"
     },
     {
       "description": "1 if the API is live, 0 if it is down. ",
@@ -435,6 +467,64 @@
       ],
       "title": "Uptime",
       "type": "state-timeline"
+    },
+    {
+      "description": "Virtual memory",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(process_resident_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Memory usage",
+      "transparent": true,
+      "type": "stat"
     }
   ],
   "schemaVersion": 34,
