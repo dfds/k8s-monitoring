@@ -101,7 +101,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(visual_recognition_response_time_seconds_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"}[1h]))\r\n",
+          "expr": "sum(increase(visual_recognition_response_time_seconds_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\", function_name=\"extract_unitnumbers\"}[1h]))\r\n",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -191,7 +191,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(visual_recognition_returned_unitnumbers_sum[1h])) /  sum(increase(visual_recognition_returned_unitnumbers_count[1h]))\r\n\r\n\r\n\r\n",
+          "expr": "sum(increase(visual_recognition_returned_unitnumbers_sum{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h])) /  sum(increase(visual_recognition_returned_unitnumbers_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h]))\r\n\r\n\r\n\r\n",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -380,7 +380,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum by (le)(visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api\", function_name=\"extract_unitnumbers\"})",
+          "expr": "sum by (le)(visual_recognition_response_time_seconds_bucket{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\", function_name=\"extract_unitnumbers\"})",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
