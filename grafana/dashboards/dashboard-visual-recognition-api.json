@@ -207,7 +207,7 @@
           {
             "evaluator": {
               "params": [
-                0.01
+                0.5
               ],
               "type": "gt"
             },
@@ -271,7 +271,6 @@
             }
           },
           "mappings": [],
-          "max": 0.015,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -279,10 +278,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
               }
             ]
           },
@@ -315,7 +310,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(rate(process_cpu_seconds_total{namespace=\"terminal-unitnumberdet-enjmx\"}[1m]))",
+          "expr": "sum(rate(process_cpu_seconds_total{namespace=\"terminal-unitnumberdet-enjmx\", service=\"visual-recognition-api-production\"}[1m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -325,7 +320,7 @@
         {
           "colorMode": "critical",
           "op": "gt",
-          "value": 0.01,
+          "value": 0.5,
           "visible": true
         }
       ],
@@ -459,7 +454,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(up{namespace=\"terminal-unitnumberdet-enjmx\", service=\"visual-recognition-api\"})",
+          "expr": "avg(up{namespace=\"terminal-unitnumberdet-enjmx\", service=\"visual-recognition-api-production\"})",
           "interval": "",
           "legendFormat": "API Uptime",
           "refId": "A"
@@ -516,7 +511,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(process_resident_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\"})",
+          "expr": "avg(process_resident_memory_bytes{namespace=\"terminal-unitnumberdet-enjmx\", service=\"visual-recognition-api-production\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
