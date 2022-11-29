@@ -119,7 +119,7 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 1.2,
+            "axisSoftMax": 0.6,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 27,
@@ -735,6 +735,6 @@
   "timezone": "",
   "title": "Visual Recognition API",
   "uid": "D2VHu0Cnz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
