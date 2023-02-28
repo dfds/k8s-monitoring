@@ -10,12 +10,11 @@ data:
       isDefault: true
     - name: Postgres-Overdue
       type: postgres
-      # this is the relative url
-      url: db
+      url: $(OVERDUEFORECAST_POSTGRES_URL)
       database: overdueforecast
       user: $(OVERDUEFORECAST_USER)
       secureJsonData:
-        password: "docker"
+        password: $(OVERDUEFORECAST_PASSWORD)
       jsonData:
         sslmode: "disable" # disable/require/verify-ca/verify-full
         maxOpenConns: 0         
