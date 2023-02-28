@@ -10,7 +10,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-  
+
 variables:
   # all variable in the group library are loaded in the pipeline environment
   - group: grafana-postgres-datasource
@@ -22,7 +22,7 @@ steps:
       targetFiles: "datasource.yaml"
       encoding: "auto"
       writeBOM: true
-      actionOnMissing: "fail"
+      actionOnMissing: "warn"
       keepToken: false
       tokenPrefix: "$("
       tokenSuffix: ")"
