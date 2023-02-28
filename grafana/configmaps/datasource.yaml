@@ -8,6 +8,21 @@ data:
       url: http://monitoring-kube-prometheus-prometheus.monitoring:9090
       access: proxy
       isDefault: true
+    - name: Postgres-Overdue
+      type: postgres
+      # this is the relative url
+      url: db
+      database: overdueforecast
+      user: $(TEST_VARIABLE)
+      secureJsonData:
+        password: "docker"
+      jsonData:
+        sslmode: "disable" # disable/require/verify-ca/verify-full
+        maxOpenConns: 0         
+        maxIdleConns: 2         
+        connMaxLifetime: 14400  
+        postgresVersion: 13
+        timescaledb: false
 kind: ConfigMap
 metadata:
   labels:

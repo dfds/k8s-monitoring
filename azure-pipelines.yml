@@ -10,8 +10,24 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  variables:
+    # all variable in the group library are loaded in the pipeline environment
+   - group: grafana-postgres-datasource
 steps:
+  - task: replacetokens@3
+    # Using replace tokens for the postgres data source conexions 
+    inputs:
+      rootDirectory: "$(System.DefaultWorkingDirectory)/grafana/configmaps"
+      targetFiles: "datasource.yaml"
+      encoding: "auto"
+      writeBOM: true
+      actionOnMissing: "fail"
+      keepToken: false
+      tokenPrefix: "$("
+      tokenSuffix: ")"
+      useLegacyPattern: false
+      enableTransforms: false
+      enableTelemetry: false
   - task: PowerShell@2
     displayName: Converting json dashboards to configmaps
     inputs:
