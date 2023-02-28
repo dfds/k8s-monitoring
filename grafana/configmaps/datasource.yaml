@@ -13,7 +13,7 @@ data:
       # this is the relative url
       url: db
       database: overdueforecast
-      user: $(TEST_VARIABLE)
+      user: $(OVERDUEFORECAST_USER)
       secureJsonData:
         password: "docker"
       jsonData:
