@@ -23,6 +23,14 @@ and they should be persisted in k8s this way. The JSON dashboards are converted 
 [powershell script](./grafana/Convert-JSONToConfigmap.ps1), and deployed using
 [azure pipelines](./azure-pipelines.yml).
 
+## Adding Data Source connection for postgres
+
+To include a data source connection to a postgres database in the grafana deployment you should
+include the datasource in [datasource.yaml](./grafana/configmaps/datasource.yaml). See 
+`Postgres-Overdue` as inspiration. The connection requires the postgres database url and the
+username and password (read-only user recommended) which are defined in the ADO library
+`grafana-postgres-datasource`. More information can be found in https://grafana.com/docs/grafana/latest/datasources/postgres/
+
 ### Naming conventions
 
 Please name your dashboard `dashboard-<name>.json`, where `<name>` is some name you come up with (no
