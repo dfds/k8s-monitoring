@@ -110,4 +110,4 @@ steps:
       namespace: $(NAMESPACE)
       valueFile: helm-values.yaml
       arguments: '--set admin.existingSecret=grafana-password'
-  
+      releaseName: grafana
