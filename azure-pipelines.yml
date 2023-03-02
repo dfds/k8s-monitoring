@@ -11,13 +11,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-resources:
-  repositories:
-    - repository: templates
-      type: git
-      name: "Smart Data/pipeline_templates"
-      ref: refs/tags/v0.5.8
-
 variables:
   # all variable in the group library are loaded in the pipeline environment
   - group: grafana-postgres-datasource
@@ -26,7 +19,7 @@ variables:
 steps:
   ### Add datasources and dashboards as configmaps
   - task: replacetokens@3
-    # Using replace tokens for the postgres data source conexions 
+    # Using replace tokens for the postgres data source connections 
     inputs:
       rootDirectory: "$(System.DefaultWorkingDirectory)/grafana/configmaps"
       targetFiles: "datasource.yaml"
@@ -48,12 +41,6 @@ steps:
       errorActionPreference: 'stop'
       pwsh: true
       workingDirectory: grafana/
-    
-  - template: k8s-auth.yaml@templates
-    parameters:
-      saml2aws_username: $(SAML2AWS_USERNAME)
-      saml2aws_password: $(SAML2AWS_PASSWORD)
-      saml2aws_role: $(SAML2AWS_ROLE)
 
   - task: Kubernetes@1
     displayName: kubectl apply configmaps
@@ -68,7 +55,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        kubectl --namespace $(NAMESPACE) create secret generic grafana-password --from-literal=admin-user=admin --from-literal=admin-password=$(ADMIN_PASSWORD) --dry-run=client -o yaml | Out-File secret.yaml
+        kubectl --namespace $(NAMESPACE) create secret generic grafana-password --from-literal=admin-user=admin --from-literal=admin-password=$(ADMIN_PASSWORD) --dry-run=client -o yaml | Out-File k8s/secret.yaml
 
   - task: Kubernetes@1
     displayName: kubectl apply secret
@@ -76,26 +63,18 @@ steps:
       connectionType: Kubernetes Service Connection
       kubernetesServiceEndpoint: hellman-mlops-deploy
       command: apply
-      arguments: -f secret.yaml
+      arguments: -f k8s/secret.yaml
 
   - task: replacetokens@3
     # Using replace tokens for the postgres data source conexions 
     inputs:
-      targetFiles: "helm-values.yaml"
+      targetFiles: "helm/values.yaml"
       encoding: "auto"
       writeBOM: true
       actionOnMissing: "error"
       keepToken: false
       tokenPrefix: "$("
       tokenSuffix: ")"
-
-  # - task: PowerShell@2
-  #   displayName: "Add Helm charts"
-  #   inputs:
-  #     targetType: 'inline'
-  #     script: |
-  #       helm repo add grafana https://grafana.github.io/helm-charts
-  #       helm repo update
 
   - task: HelmDeploy@0
     displayName: helm upgrade grafana
@@ -106,8 +85,27 @@ steps:
       # chartType: 'Name'
       # chartName: 'grafana/grafana'
       chartType: 'FilePath'
-      chartPath: 'grafana-6.51.2.tgz'
+      chartPath: 'helm/grafana-6.51.2.tgz'
       namespace: $(NAMESPACE)
-      valueFile: helm-values.yaml
+      valueFile: helm/values.yaml
       arguments: '--set admin.existingSecret=grafana-password'
       releaseName: grafana
+
+  - task: replacetokens@3
+    # Using replace tokens for the postgres data source conexions 
+    inputs:
+      targetFiles: "k8s/ingressroute.yaml"
+      encoding: "auto"
+      writeBOM: true
+      actionOnMissing: "error"
+      keepToken: false
+      tokenPrefix: "$("
+      tokenSuffix: ")"
+
+  - task: Kubernetes@1
+    displayName: kubectl apply ingressroute
+    inputs:
+      connectionType: Kubernetes Service Connection
+      kubernetesServiceEndpoint: hellman-mlops-deploy
+      command: apply
+      arguments: -f k8s/ingressroute.yaml
