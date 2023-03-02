@@ -71,7 +71,7 @@ steps:
       targetFiles: "helm/values.yaml"
       encoding: "auto"
       writeBOM: true
-      actionOnMissing: "error"
+      actionOnMissing: "fail"
       keepToken: false
       tokenPrefix: "$("
       tokenSuffix: ")"
