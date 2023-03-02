@@ -13,7 +13,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: grafana
-  namespace: $NAMESPACE
+  namespace: $(NAMESPACE)
 spec:
   entryPoints:
   - web
