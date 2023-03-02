@@ -11,7 +11,7 @@ service:
 grafana.ini:
   server:
     domain: grafana.hellman.oxygen.dfds.cloud
-    root_url: "https://%(domain)s/$(NAMESPACE)"
+    root_url: https://%(domain)s/$(NAMESPACE)
     # serve_from_sub_path: true
 
 image:
