@@ -68,7 +68,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        kubectl --namespace $(NAMESPACE) create secret generic "grafana-password" --from-literal=admin-user=admin --from-literal=admin-password="$(ADMIN_PASSWORD)" --dry-run=client -o yaml | Out-File secret.yaml
+        kubectl --namespace $(NAMESPACE) create secret generic grafana-password --from-literal=admin-user=admin --from-literal=admin-password=$(ADMIN_PASSWORD) --dry-run=client -o yaml | Out-File secret.yaml
 
   - task: Kubernetes@1
     displayName: kubectl apply secret
@@ -107,7 +107,7 @@ steps:
       # chartName: 'grafana/grafana'
       chartType: 'FilePath'
       chartPath: 'grafana-6.51.2.tgz'
-      namespace: '$(NAMESPACE)'
-      valueFile: 'helm-values.yaml'
-      arguments: '--set admin.existingSecret="grafana-password"'
+      namespace: $(NAMESPACE)
+      valueFile: helm-values.yaml
+      arguments: '--set admin.existingSecret=grafana-password'
   
