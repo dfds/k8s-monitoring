@@ -66,7 +66,6 @@ steps:
       arguments: -f k8s/secret.yaml
 
   - task: replacetokens@3
-    # Using replace tokens for the postgres data source conexions 
     inputs:
       targetFiles: "helm/values.yaml"
       encoding: "auto"
@@ -82,8 +81,6 @@ steps:
       connectionType: 'Kubernetes Service Connection'
       kubernetesServiceEndpoint: hellman-mlops-deploy
       command: upgrade
-      # chartType: 'Name'
-      # chartName: 'grafana/grafana'
       chartType: 'FilePath'
       chartPath: 'helm/grafana-6.51.2.tgz'
       namespace: $(NAMESPACE)
@@ -92,7 +89,6 @@ steps:
       releaseName: grafana
 
   - task: replacetokens@3
-    # Using replace tokens for the postgres data source conexions 
     inputs:
       targetFiles: "k8s/ingressroute.yaml"
       encoding: "auto"
