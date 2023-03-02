@@ -3,28 +3,28 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: grafana-mw
-  namespace: $NAMESPACE
+  namespace: $(NAMESPACE)
 spec:
   stripPrefix:
     prefixes:
-    - "/$NAMESPACE"
+    - "/$(NAMESPACE)"
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: grafana
-  namespace: $NAMESPACE
+  namespace: $(NAMESPACE)
 spec:
   entryPoints:
   - web
   routes:
   - kind: Rule
-    match: Host('grafana.hellman.oxygen.dfds.cloud') && PathPrefix('/$NAMESPACE')
+    match: Host(`grafana.hellman.oxygen.dfds.cloud`) && PathPrefix(`/$(NAMESPACE)`)
     middlewares:
     - name: grafana-mw
-      namespace: $NAMESPACE
+      namespace: $(NAMESPACE)
     services:
     - kind: Service
       name: grafana
-      namespace: $NAMESPACE
+      namespace: $(NAMESPACE)
       port: 80
