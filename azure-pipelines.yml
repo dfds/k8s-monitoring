@@ -89,13 +89,13 @@ steps:
       tokenPrefix: "$("
       tokenSuffix: ")"
 
-  - task: PowerShell@2
-    displayName: "Add Helm charts"
-    inputs:
-      targetType: 'inline'
-      script: |
-        helm repo add grafana https://grafana.github.io/helm-charts
-        helm repo update
+  # - task: PowerShell@2
+  #   displayName: "Add Helm charts"
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       helm repo add grafana https://grafana.github.io/helm-charts
+  #       helm repo update
 
   - task: HelmDeploy@0
     displayName: helm upgrade grafana
@@ -103,8 +103,10 @@ steps:
       connectionType: 'Kubernetes Service Connection'
       kubernetesServiceEndpoint: hellman-mlops-deploy
       command: upgrade
-      chartType: 'Name'
-      chartName: 'grafana/grafana'
+      # chartType: 'Name'
+      # chartName: 'grafana/grafana'
+      chartType: 'FilePath'
+      chartPath: 'grafana-6.51.2.tgz'
       namespace: '$(NAMESPACE)'
       valueFile: 'helm-values.yaml'
       arguments: '--set admin.existingSecret="grafana-password"'
