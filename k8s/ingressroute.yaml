@@ -19,7 +19,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: Host('grafana.hellman.oxygen.dfds.cloud') && PathPrefix('/$(NAMESPACE)')
+    match: Host(`grafana.hellman.oxygen.dfds.cloud`) && PathPrefix(`/$(NAMESPACE)`)
     middlewares:
     - name: grafana-mw
       namespace: $(NAMESPACE)
