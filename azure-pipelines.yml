@@ -96,7 +96,7 @@ steps:
       script: |
         helm repo add grafana https://grafana.github.io/helm-charts
         helm repo update
-        
+
   - task: HelmDeploy@0
     displayName: helm upgrade grafana
     inputs:
@@ -107,5 +107,5 @@ steps:
       chartName: 'grafana/grafana'
       namespace: '$(NAMESPACE)'
       valueFile: 'helm-values.yaml'
-      arguments: '--install --set admin.existingSecret="grafana-password"'
+      arguments: '--set admin.existingSecret="grafana-password"'
   
