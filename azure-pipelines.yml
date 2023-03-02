@@ -24,9 +24,7 @@ variables:
   - group: grafana-deploy
 
 steps:
-  - bash: |
-      mkdir -p ~/.kube
-      wget https://build.dfds.cloud/downloads/kubeconfig -O ~/.kube/config
+  ### Add datasources and dashboards as configmaps
   - task: replacetokens@3
     # Using replace tokens for the postgres data source conexions 
     inputs:
@@ -65,10 +63,41 @@ steps:
       command: apply
       arguments: -f grafana/configmaps
 
+  ### Deploy grafana
   - task: PowerShell@2
     inputs:
-      targetType: 'filePath'
-      filePath: deploy-grafana.ps1
-      arguments: $(NAMESPACE) $(SLACK_CHANNEL) $(SLACK_URL) $(ADMIN_PASSWORD) $(TEAMS_URL)
-    env:
-      ADMIN_PASSWORD: $(ADMIN_PASSWORD)
+      targetType: 'inline'
+      script: |
+        kubectl --namespace $(NAMESPACE) create secret generic "grafana-password" --from-literal=admin-user=admin --from-literal=admin-password="$(ADMIN_PASSWORD)" --dry-run=client -o yaml | Out-File k8s/secret.yaml
+
+  - task: Kubernetes@1
+    displayName: kubectl apply secret
+    inputs:
+      connectionType: Kubernetes Service Connection
+      kubernetesServiceEndpoint: hellman-mlops-deploy
+      command: apply
+      arguments: -f k8s/secret.yaml
+
+  - task: replacetokens@3
+    # Using replace tokens for the postgres data source conexions 
+    inputs:
+      targetFiles: "helm-values.yaml"
+      encoding: "auto"
+      writeBOM: true
+      actionOnMissing: "error"
+      keepToken: false
+      tokenPrefix: "$("
+      tokenSuffix: ")"
+
+  - task: HelmDeploy@0
+    displayName: helm upgrade grafana
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: hellman-mlops-deploy
+      command: upgrade
+      chartType: 'Name'
+      chartName: 'grafana'
+      namespace: '$(NAMESPACE)'
+      valueFile: 'helm-values.yaml'
+      arguments: '--install --set admin.existingSecret="grafana-password"'
+  

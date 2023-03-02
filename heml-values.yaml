@@ -1,0 +1,69 @@
+ingress:
+  enabled: false
+  path: /$(NAMESPACE)
+  hosts:
+  - grafana.hellman.oxygen.dfds.cloud
+
+service:
+  labels:
+    delivered_by: devex
+
+grafana.ini:
+  server:
+    domain: grafana.hellman.oxygen.dfds.cloud
+    root_url: "https://%(domain)s/$(NAMESPACE)"
+    # serve_from_sub_path: true
+
+image:
+  tag: 8.2.6
+
+rbac:
+  create: true
+  namespaced: true
+  pspEnabled: false
+  pspUseAppArmor: false
+
+sidecar:
+  dashboards:
+    enabled: true
+  datasources:
+    enabled: true
+  notifiers:
+    enabled: true
+
+plugins:
+  - grafana-polystat-panel
+
+notifiers:
+  notifiers.yaml:
+    notifiers:
+      - name: slack-channel-1
+        type: slack
+        uid: notifier1
+        org_id: 1
+        is_default: false
+        send_reminder: true
+        frequency: 1h
+        disable_resolve_message: false
+        # See  section for settings supporter for each
+        # alert notification type.
+        settings:
+          recipient: '#$(SLACK_CHANNEL)'
+          uploadImage: true
+          url: $(SLACK_URL)
+          username: alertbot
+      - name: teams-alert
+        type: teams
+        uid: teams-alert
+        org_id: 1
+        is_default: true
+        settings:
+          url: $(TEAMS_URL)
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
