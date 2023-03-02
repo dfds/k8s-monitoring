@@ -11,9 +11,18 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Smart Data/pipeline_templates"
+      ref: refs/tags/v0.5.8
+
 variables:
   # all variable in the group library are loaded in the pipeline environment
   - group: grafana-postgres-datasource
+  - group: grafana-deploy
+
 steps:
   - task: replacetokens@3
     # Using replace tokens for the postgres data source conexions 
@@ -29,6 +38,7 @@ steps:
       useLegacyPattern: false
       enableTransforms: false
       enableTelemetry: false
+      
   - task: PowerShell@2
     displayName: Converting json dashboards to configmaps
     inputs:
@@ -37,6 +47,12 @@ steps:
       errorActionPreference: 'stop'
       pwsh: true
       workingDirectory: grafana/
+    
+  - template: k8s-auth.yaml@templates
+    parameters:
+      saml2aws_username: $(SAML2AWS_USERNAME)
+      saml2aws_password: $(SAML2AWS_PASSWORD)
+      saml2aws_role: $(SAML2AWS_ROLE)
 
   - task: Kubernetes@1
     displayName: kubectl apply configmaps
@@ -45,3 +61,11 @@ steps:
       kubernetesServiceEndpoint: hellman-mlops-deploy
       command: apply
       arguments: -f grafana/configmaps
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'filePath'
+      filePath: deploy-grafana.ps1
+      arguments: $(NAMESPACE) $(SLACK_CHANNEL) $(SLACK_URL) $(ADMIN_PASSWORD) $(TEAMS_URL)
+    env:
+      ADMIN_PASSWORD: $(ADMIN_PASSWORD)
