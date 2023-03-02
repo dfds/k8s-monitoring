@@ -68,7 +68,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        kubectl --namespace $(NAMESPACE) create secret generic "grafana-password" --from-literal=admin-user=admin --from-literal=admin-password="$(ADMIN_PASSWORD)" --dry-run=client -o yaml | Out-File k8s/secret.yaml
+        kubectl --namespace $(NAMESPACE) create secret generic "grafana-password" --from-literal=admin-user=admin --from-literal=admin-password="$(ADMIN_PASSWORD)" --dry-run=client -o yaml | Out-File secret.yaml
 
   - task: Kubernetes@1
     displayName: kubectl apply secret
@@ -76,7 +76,7 @@ steps:
       connectionType: Kubernetes Service Connection
       kubernetesServiceEndpoint: hellman-mlops-deploy
       command: apply
-      arguments: -f k8s/secret.yaml
+      arguments: -f secret.yaml
 
   - task: replacetokens@3
     # Using replace tokens for the postgres data source conexions 
