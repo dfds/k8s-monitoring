@@ -14,8 +14,14 @@ grafana.ini:
     root_url: 'https://%(domain)s/$(NAMESPACE)'
     # serve_from_sub_path: true
 
+  unified_alerting:
+    enabled: false
+
+  alerting:
+    enabled: true
+
 image:
-  tag: 8.2.6
+  tag: 9.4.3
 
 rbac:
   create: true
