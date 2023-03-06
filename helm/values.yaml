@@ -21,7 +21,7 @@ grafana.ini:
     enabled: true
 
 image:
-  tag: 9.4.3
+  tag: 8.2.6
 
 rbac:
   create: true
