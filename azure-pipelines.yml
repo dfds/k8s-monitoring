@@ -19,7 +19,7 @@ variables:
 steps:
   ### Add datasources and dashboards as configmaps
   - task: replacetokens@3
-    # Using replace tokens for the postgres data source connections 
+    # Using replace tokens for the postgres data source connections
     inputs:
       rootDirectory: "$(System.DefaultWorkingDirectory)/grafana/configmaps"
       targetFiles: "datasource.yaml"
@@ -32,7 +32,7 @@ steps:
       useLegacyPattern: false
       enableTransforms: false
       enableTelemetry: false
-      
+
   - task: PowerShell@2
     displayName: Converting json dashboards to configmaps
     inputs:
