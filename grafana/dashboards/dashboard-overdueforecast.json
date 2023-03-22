@@ -569,8 +569,8 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "Average of predicted probability overdue is outside 10%-90% interval in the  the last three days.",
-        "name": "Probability overdue alert",
+        "message": "Overdue Forecast: \n\nAverage of predicted probability overdue is outside 10%-90% interval in the  the last three days.",
+        "name": "Overdue Forecast: Probability overdue alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -605,10 +605,12 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -618,7 +620,11 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 0.1
+              },
+              {
+                "color": "red",
+                "value": 0.9
               }
             ]
           }
@@ -773,8 +779,8 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "Percentage of null values in features is higher than 30% in the last three days.",
-        "name": "Percentage of null values in features alert",
+        "message": "Overdue Forecast\n\nPercentage of null values in features is higher than 30% in the last three days.",
+        "name": "Overdue Forecast: Percentage of null values in features alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -810,10 +816,11 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -823,7 +830,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 0.3
               }
             ]
           }
@@ -933,5 +940,5 @@
   "timezone": "",
   "title": "Overdue Forecast",
   "uid": "7272vhb4k",
-  "version": 1
+  "version": 2
 }
