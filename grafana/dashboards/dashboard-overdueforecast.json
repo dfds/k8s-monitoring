@@ -381,7 +381,69 @@
       "type": "row"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0,
+                0
+              ],
+              "type": "within_range"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "D365",
+                "48h",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "percent_diff"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                0,
+                0
+              ],
+              "type": "within_range"
+            },
+            "operator": {
+              "type": "or"
+            },
+            "query": {
+              "params": [
+                "Visma",
+                "48h",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "percent_diff"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Overdue Forecast\n\nNo invoices predictions  have been included in the last 48h",
+        "name": "Overdue Forecast Number of invoices alert",
+        "noDataState": "alerting",
+        "notifications": []
+      },
       "datasource": "Postgres-Overdue",
+      "description": "Number of invoices predicted (x axis is the prediction inserted datetime)",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -509,6 +571,20 @@
           ]
         }
       ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 0,
+          "visible": false
+        },
+        {
+          "colorMode": "critical",
+          "op": "lt",
+          "value": 0,
+          "visible": false
+        }
+      ],
       "title": "Number of invoices",
       "type": "timeseries"
     },
@@ -571,10 +647,11 @@
         "handler": 1,
         "message": "Overdue Forecast: \n\nAverage of predicted probability overdue is outside 10%-90% interval in the  the last three days.",
         "name": "Overdue Forecast: Probability overdue alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": []
       },
       "datasource": "Postgres-Overdue",
+      "description": "Average of the predicted probability of being overdue ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -781,7 +858,7 @@
         "handler": 1,
         "message": "Overdue Forecast\n\nPercentage of null values in features is higher than 30% in the last three days.",
         "name": "Overdue Forecast: Percentage of null values in features alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": []
       },
       "datasource": "Postgres-Overdue",
@@ -940,5 +1017,5 @@
   "timezone": "",
   "title": "Overdue Forecast",
   "uid": "7272vhb4k",
-  "version": 2
+  "version": 3
 }
