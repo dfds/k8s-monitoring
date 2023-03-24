@@ -17,8 +17,8 @@ data:
         password: $(OVERDUEFORECAST_PASSWORD)
       jsonData:
         sslmode: "require" # disable/require/verify-ca/verify-full
-        maxOpenConns: 0
-        maxIdleConns: 2
+        maxOpenConns: 1
+        maxIdleConns: 5
         connMaxLifetime: 14400
         postgresVersion: 13
         timescaledb: false
