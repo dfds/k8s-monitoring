@@ -20,23 +20,26 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": null,
   "graphTooltip": 0,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "semi-dark-yellow",
+            "fixedColor": "semi-dark-orange",
             "mode": "fixed"
           },
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 40,
+            "drawStyle": "bars",
+            "fillOpacity": 35,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -106,23 +109,25 @@
           "refId": "A"
         }
       ],
-      "title": "# Requests last minute",
+      "title": "Total number of requests last hour",
+      "transparent": true,
       "type": "timeseries"
     },
     {
-      "description": "How many requests ends up with a unitnumber in the response (percent) the last hour.",
+      "datasource": null,
+      "description": "How many requests ends up with a unitnumber or licenseplate in the response (percent) the last hour.",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlYlRd"
+            "mode": "continuous-BlPu"
           },
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 0.6,
+            "axisSoftMax": 1.04,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 27,
+            "fillOpacity": 13,
             "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
@@ -175,7 +180,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom"
         },
         "tooltip": {
@@ -190,29 +195,39 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(increase(visual_recognition_returned_unitnumbers_sum{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h])) /  sum(increase(visual_recognition_returned_unitnumbers_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h]))\r\n\r\n\r\n\r\n",
+          "expr": "sum(increase(visual_recognition_returned_unitnumbers_sum{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h])) /  sum(increase(visual_recognition_returned_unitnumbers_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h]))",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "/unitnumbers",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(increase(visual_recognition_returned_licenseplates_sum{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h])) /  sum(increase(visual_recognition_returned_licenseplates_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\"}[1h]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "/licenseplates",
+          "refId": "B"
         }
       ],
-      "title": "Fraction of requests with a unitnumber returned (last hour)",
+      "title": "Fractions of responses with a result (last hour)",
+      "transparent": true,
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "description": "The total number of requests to the unit number service.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "fixedColor": "semi-dark-yellow",
-            "mode": "fixed"
+            "mode": "continuous-YlRd"
           },
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 9,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -220,8 +235,11 @@
               "viz": false
             },
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 2,
-            "pointSize": 5,
+            "pointSize": 3,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -235,6 +253,7 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
           "mappings": [],
           "noValue": "0",
           "thresholds": {
@@ -263,7 +282,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom"
         },
         "tooltip": {
@@ -279,14 +298,24 @@
           "exemplar": true,
           "expr": "sum(increase(visual_recognition_response_time_seconds_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\", function_name=\"extract_unitnumbers\"}[1h]))\r\n",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "/unitnumbers",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(increase(visual_recognition_response_time_seconds_count{namespace=\"terminal-unitnumberdet-enjmx\",service=\"visual-recognition-api-production\", function_name=\"extract_licenseplate_number\"}[1h]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "/licenseplates",
+          "refId": "B"
         }
       ],
       "title": "Total requests last hour",
+      "transparent": true,
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -400,6 +429,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "description": "1 if the API is live, 0 if it is down. ",
       "fieldConfig": {
         "defaults": {
@@ -467,6 +497,7 @@
       "type": "state-timeline"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -504,9 +535,10 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true
+        "showUnfilled": true,
+        "text": {}
       },
-      "pluginVersion": "8.3.6",
+      "pluginVersion": "8.2.6",
       "targets": [
         {
           "datasource": {
@@ -525,6 +557,7 @@
       "type": "bargauge"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -572,6 +605,7 @@
         "noDataState": "no_data",
         "notifications": []
       },
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -663,6 +697,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "description": "Virtual memory",
       "fieldConfig": {
         "defaults": {
@@ -700,9 +735,10 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.6",
+      "pluginVersion": "8.2.6",
       "targets": [
         {
           "datasource": {
@@ -721,7 +757,7 @@
       "type": "stat"
     }
   ],
-  "schemaVersion": 34,
+  "schemaVersion": 32,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -735,6 +771,5 @@
   "timezone": "",
   "title": "Visual Recognition API",
   "uid": "D2VHu0Cnz",
-  "version": 2,
-  "weekStart": ""
+  "version": 1
 }
