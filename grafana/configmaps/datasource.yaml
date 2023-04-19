@@ -25,7 +25,7 @@ data:
     - name: Postgres-overbooking
       type: postgres
       url: $(OVERBOOKING_POSTGRESS_URL)
-      database: overbooking
+      database: overbookingdb
       user: $(OVERBOOOKING_USER)
       secureJsonData:
         password: $(OVERBOOKING_PASSWORD)
