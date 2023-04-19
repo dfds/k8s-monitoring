@@ -22,6 +22,20 @@ data:
         connMaxLifetime: 14400
         postgresVersion: 13
         timescaledb: false
+    - name: Postgres-overbooking
+      type: postgres
+      url: $(OVERBOOKING_POSTGRESS_URL)
+      database: overbooking
+      user: $(OVERBOOOKING_USER)
+      secureJsonData:
+        password: $(OVERBOOKING_PASSWORD)
+      jsonData:
+        sslmode: "require" # disable/require/verify-ca/verify-full
+        maxOpenConns: 1
+        maxIdleConns: 5
+        connMaxLifetime: 14400
+        postgresVersion: 13
+        timescaledb: false
 kind: ConfigMap
 metadata:
   labels:
