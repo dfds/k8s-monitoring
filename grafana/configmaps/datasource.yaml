@@ -15,6 +15,13 @@ data:
       user: $(OVERDUEFORECAST_USER)
       secureJsonData:
         password: $(OVERDUEFORECAST_PASSWORD)
+    - name: Postgres-overbooking
+      type: postgres
+      url: $(OVERBOOKING_POSTGRESS_URL)
+      database: overbooking
+      user: $(OVERBOOOKING_USER)
+      secureJsonData:
+        password: $(OVERBOOKING_PASSWORD)
       jsonData:
         sslmode: "require" # disable/require/verify-ca/verify-full
         maxOpenConns: 1
