@@ -47,7 +47,11 @@ function generate_ingressroute_yaml {
 generate_ingressroute_yaml
 
 echo "Set the correct quote sympbols in ingressroute.yaml"
-sed -i "s/'/\`/g" ingressroute.yaml
+if [ "$(uname -s)" == "Darwin" ]; then
+    sed -i "" "s/'/\`/g" ingressroute.yaml
+else
+    sed -i "s/'/\`/g" ingressroute.yaml
+fi
 
 echo "Deploying Traefik V2 IngressRoute and Middleware"
 kubectl --namespace $NAMESPACE apply -f ingressroute.yaml
