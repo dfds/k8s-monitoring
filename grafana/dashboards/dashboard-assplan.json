@@ -27,6 +27,42 @@
     "liveNow": false,
     "panels": [
       {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  90000
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "A",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "message": "AssPlan Optimizer has not run in the last 24 hours. Check kubernetes logs to see error messages",
+          "name": "Time since last successful optimization alert",
+          "noDataState": "no_data",
+          "notifications": []
+        },
         "datasource": null,
         "fieldConfig": {
           "defaults": {
@@ -105,6 +141,14 @@
             "refId": "A"
           }
         ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 90000,
+            "visible": true
+          }
+        ],
         "title": "Time since last successful optimization",
         "type": "timeseries"
       }
@@ -123,5 +167,5 @@
     "timezone": "",
     "title": "AssPlan",
     "uid": "cKbV9AgSk",
-    "version": 2
+    "version": 3
   }
