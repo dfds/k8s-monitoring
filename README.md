@@ -1,3 +1,12 @@
+# :warning: Repository not maintained :warning:
+
+Please note that this repository is currently archived, and is no longer being maintained.
+
+- It may contain code, or reference dependencies, with known vulnerabilities
+- It may contain out-dated advice, how-to's or other forms of documentation
+
+The contents might still serve as a source of inspiration, but please review any contents before reusing elsewhere.
+
 # Kubernetes Monitoring for Capabilities
 
 This repository is designed to be forked by your team, and contains scripts to bootstrap your Grafana deployment, and templates to setup a CI pipeline for easy deployment of your dashboards to Grafana in Kubernetes.
